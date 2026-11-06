@@ -62,7 +62,7 @@
 31 | 
 31 |             <div className="lg:block hidden">
 32 |               <Image
-33 |                 src="/enterprise-data-center.jpg"
+33 |                 src="/heroimages/circuit board technology.jpg"
 34 |                 alt="Modern enterprise data center with server racks and networking equipment"
 33 |                 className="relative h-[480px] w-full rounded-lg shadow-xl object-cover"
 35 |                 sizes="(max-width: 1200px) 100vw, 1200px"
