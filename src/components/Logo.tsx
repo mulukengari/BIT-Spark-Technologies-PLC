@@ -17,7 +17,7 @@ export function Logo({ className = "", showText = true }: LogoProps) {
         aria-hidden="true"
         className="shrink-0"
       >
-        <rect x="1" y="1" width="32" height="32" rx="8" fill="#071B49" />
+        <rect x="1" y="1" width="32" height="32" rx="6" fill="#071B49" />
         <path
           d="M10 22 L17 10 L24 22"
           stroke="#0866D6"
@@ -28,18 +28,18 @@ export function Logo({ className = "", showText = true }: LogoProps) {
         />
         <path
           d="M13.5 18 H20.5"
-          stroke="#FF8A24"
+          stroke="#0866D6"
           strokeWidth="2.5"
           strokeLinecap="round"
         />
-        <circle cx="17" cy="9" r="2" fill="#FF8A24" />
+        <circle cx="17" cy="9" r="2" fill="#0866D6" />
       </svg>
       {showText && (
         <span className="flex flex-col leading-tight">
-          <span className="text-base font-bold tracking-tight text-navy">
-            BIT <span className="text-electric">Spark</span>
+          <span className="text-base font-bold tracking-tight text-midnight-blue">
+            BIT <span className="text-indigo">Spark</span>
           </span>
-          <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-navy/60">
+          <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-foreground">
             Technologies PLC
           </span>
         </span>

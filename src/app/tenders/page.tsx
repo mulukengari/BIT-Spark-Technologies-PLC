@@ -35,13 +35,13 @@ export default function TendersPage() {
             {tenderPoints.map((p) => (
               <div
                 key={p}
-                className="rounded-xl border border-navy/10 bg-white p-6 text-sm text-navy/80 shadow-sm"
+                className="rounded-lg border border-border bg-white p-6 text-sm text-foreground/90"
               >
                 {p}
               </div>
             ))}
           </div>
-          <p className="mt-6 text-sm text-navy/60">
+          <p className="mt-6 text-sm text-foreground">
             We do not claim government contracts or completed projects unless verified. Contact us
             for tender invitations and procurement inquiries.
           </p>

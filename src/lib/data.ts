@@ -70,49 +70,65 @@ export const productCategories = [
   {
     id: "enterprise-computing",
     title: "Enterprise Computing",
+    description:
+      "Enterprise-grade servers, computing platforms, and virtualization infrastructure that power reliable business operations.",
+    image:
+      "https://images.unsplash.com/photo-1558494949-ef646c4e61f6?w=700&q=80&auto=format&fit=crop",
     items: ["Rack servers", "Tower servers", "Enterprise computing platforms", "Virtualization infrastructure"],
   },
   {
     id: "enterprise-storage",
     title: "Enterprise Storage",
-    items: [
-      "Storage systems",
-      "All-flash storage",
-      "Hybrid storage",
-      "Backup and recovery solutions",
-      "Data protection infrastructure",
-    ],
+    description:
+      "Storage systems, all-flash and hybrid arrays, backup, and data protection infrastructure built for performance and resilience.",
+    image:
+      "https://images.unsplash.com/photo-1527566742926-d8c688649d77?w=700&q=80&auto=format&fit=crop",
+    items: ["Storage systems", "All-flash storage", "Hybrid storage", "Backup and recovery solutions", "Data protection infrastructure"],
   },
   {
     id: "networking",
-    title: "Networking Solutions",
+    title: "Networking",
+    description:
+      "Enterprise switches, routers, wireless infrastructure, and network management solutions for secure connectivity.",
+    image:
+      "https://images.unsplash.com/photo-1526381307759-0bf187db1066?w=700&q=80&auto=format&fit=crop",
     items: ["Enterprise switches", "Routers", "Wireless infrastructure", "Network management solutions"],
   },
   {
     id: "data-center",
-    title: "Data Center Solutions",
+    title: "Data Center Infrastructure",
+    description:
+      "Data center infrastructure, hyperconverged systems, virtualization, and consolidation designed for capacity and resilience.",
+    image:
+      "https://images.unsplash.com/photo-1558494949-ef646c4e61f6?w=700&q=80&auto=format&fit=crop",
     items: ["Data center infrastructure", "Hyperconverged infrastructure", "Virtualization", "Infrastructure consolidation"],
   },
   {
     id: "cybersecurity",
     title: "Cybersecurity",
+    description:
+      "Network security, firewalls, endpoint protection, and security management solutions that protect business-critical systems.",
+    image:
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=700&q=80&auto=format&fit=crop",
     items: ["Network security", "Firewalls", "Endpoint protection", "Security management solutions"],
   },
   {
-    id: "software",
-    title: "Software and Licensing",
-    items: [
-      "Microsoft software and cloud subscriptions",
-      "Enterprise software licensing",
-      "Backup software",
-      "Virtualization software",
-      "Security software",
-    ],
+    id: "cloud-solutions",
+    title: "Cloud Solutions",
+    description:
+      "Cloud migration, deployment, and management services that help organizations modernize, scale, and reduce operational overhead.",
+    image:
+      "https://images.unsplash.com/photo-1544243303-5250576a743e?w=700&q=80&auto=format&fit=crop",
+    items: ["Cloud migration", "Cloud deployment", "Cloud management", "Hybrid cloud infrastructure"],
   },
   {
-    id: "computers",
-    title: "Computers and Accessories",
-    items: ["Business laptops", "Desktop computers", "Monitors", "Printers", "IT accessories"],
+    id: "software",
+    title: "Software Licensing",
+    description:
+      "Licensed business software, Microsoft cloud subscriptions, enterprise applications, and security software managed with compliance in mind.",
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&q=80&auto=format&fit=crop",
+    items: ["Microsoft software and cloud subscriptions", "Enterprise software licensing", "Backup software", "Virtualization software", "Security software"],
   },
 ];
 

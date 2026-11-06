@@ -13,10 +13,10 @@ type ButtonProps = {
 };
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary: "bg-electric text-white hover:bg-navy",
-  secondary: "bg-orange text-white hover:bg-navy",
-  outline: "border border-navy/20 text-navy hover:border-electric hover:text-electric",
-  ghost: "text-electric hover:text-navy",
+  primary: "bg-indigo text-white hover:bg-indigo/90",
+  secondary: "bg-amber text-white hover:bg-amber/90",
+  outline: "border border-indigo/10 bg-transparent text-midnight-blue hover:border-midnight-blue hover:text-midnight-blue",
+  ghost: "text-indigo hover:text-indigo/80",
 };
 
 export function Button({

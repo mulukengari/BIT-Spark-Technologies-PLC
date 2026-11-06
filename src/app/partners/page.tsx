@@ -26,13 +26,13 @@ export default function PartnersPage() {
             {partners.map((p) => (
               <div
                 key={p}
-                className="flex items-center justify-center rounded-xl border border-navy/10 bg-white p-8 text-lg font-semibold text-navy shadow-sm transition-colors hover:border-electric hover:text-electric"
+                className="flex items-center justify-center rounded-lg border border-border bg-white p-8 text-base font-semibold text-navy"
               >
                 {p}
               </div>
             ))}
           </div>
-          <p className="mt-8 text-sm text-navy/60">
+          <p className="mt-8 text-sm text-foreground">
             Partner logos, authorization, and certification claims are displayed only after official
             confirmation. Contact us to discuss partnership opportunities.
           </p>

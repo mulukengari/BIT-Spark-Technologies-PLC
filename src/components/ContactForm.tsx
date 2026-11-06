@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, FormEvent } from "react";
-import { inquiryCategories } from "@/lib/data";
+import { useState, FormEvent } from 'react';
+import { inquiryCategories } from '@/lib/data';
 
 type FormState = {
   fullName: string;
@@ -15,32 +15,32 @@ type FormState = {
 };
 
 const initial: FormState = {
-  fullName: "",
-  organization: "",
-  email: "",
-  phone: "",
-  subject: "",
-  message: "",
+  fullName: '',
+  organization: '',
+  email: '',
+  phone: '',
+  subject: '',
+  message: '',
   category: inquiryCategories[0],
-  company: "",
+  company: '',
 };
 
 export function ContactForm() {
   const [form, setForm] = useState<FormState>(initial);
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
-  const [serverMessage, setServerMessage] = useState("");
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [serverMessage, setServerMessage] = useState('');
 
   function validate(): boolean {
     const next: Partial<Record<keyof FormState, string>> = {};
-    if (!form.fullName.trim()) next.fullName = "Full name is required.";
-    if (!form.email.trim()) next.email = "Email address is required.";
-    else if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(form.email))
-      next.email = "Enter a valid email address.";
-    if (!form.subject.trim()) next.subject = "Subject is required.";
-    if (!form.message.trim()) next.message = "Message is required.";
+    if (!form.fullName.trim()) next.fullName = 'Full name is required.';
+    if (!form.email.trim()) next.email = 'Email address is required.';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
+      next.email = 'Enter a valid email address.';
+    if (!form.subject.trim()) next.subject = 'Subject is required.';
+    if (!form.message.trim()) next.message = 'Message is required.';
     else if (form.message.trim().length < 10)
-      next.message = "Message must be at least 10 characters.";
+      next.message = 'Message must be at least 10 characters.';
     setErrors(next);
     return Object.keys(next).length === 0;
   }
@@ -49,30 +49,30 @@ export function ContactForm() {
     e.preventDefault();
     if (!validate()) return;
     if (form.company) {
-      setStatus("success");
-      setServerMessage("Thank you. Your inquiry has been received.");
+      setStatus('success');
+      setServerMessage('Thank you. Your inquiry has been received.');
       setForm(initial);
       return;
     }
-    setStatus("submitting");
+    setStatus('submitting');
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
       const data = await res.json();
       if (!res.ok) {
-        setStatus("error");
-        setServerMessage(data?.error || "Something went wrong. Please try again.");
+        setStatus('error');
+        setServerMessage(data?.error || 'Something went wrong. Please try again.');
         return;
       }
-      setStatus("success");
-      setServerMessage(data?.message || "Thank you. Your inquiry has been received.");
+      setStatus('success');
+      setServerMessage(data?.message || 'Thank you. Your inquiry has been received.');
       setForm(initial);
     } catch {
-      setStatus("error");
-      setServerMessage("Network error. Please try again later.");
+      setStatus('error');
+      setServerMessage('Network error. Please try again later.');
     }
   }
 
@@ -82,90 +82,88 @@ export function ContactForm() {
   }
 
   const inputClass =
-    "w-full rounded-md border border-navy/20 bg-white px-3 py-2 text-sm text-navy placeholder:text-navy/40 focus:border-electric focus:outline-none focus:ring-1 focus:ring-electric";
+    'w-full rounded-md border border-indigo/10 bg-card px-3 py-2 text-sm text-midnight-blue placeholder:text-midnight-blue/50 focus:border-indigo focus:outline-none focus:ring-1 focus:ring-indigo';
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-5">
-      <div className="hidden" aria-hidden="true">
+    <form onSubmit={handleSubmit} noValidate className='space-y-6'>
+      <div className='hidden' aria-hidden='true'>
         <label>
           Company
           <input
-            type="text"
+            type='text'
             tabIndex={-1}
-            autoComplete="off"
+            autoComplete='off'
             value={form.company}
-            onChange={(e) => update("company", e.target.value)}
+            onChange={(e) => update('company', e.target.value)}
           />
         </label>
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className='grid gap-6 sm:grid-cols-2'>
         <div>
-          <label htmlFor="fullName" className="block text-sm font-medium text-navy">
-            Full Name <span className="text-orange">*</span>
+          <label htmlFor='fullName' className='block text-sm font-medium text-midnight-blue'>
+            Full Name <span className='text-indigo'>*</span>
           </label>
           <input
-            id="fullName"
-            type="text"
+            id='fullName'
+            type='text'
             className={inputClass}
             value={form.fullName}
-            onChange={(e) => update("fullName", e.target.value)}
-            required
+            onChange={(e) => update('fullName', e.target.value)}
           />
-          {errors.fullName && <p className="mt-1 text-xs text-orange">{errors.fullName}</p>}
+          {errors.fullName && <p className='mt-1 text-xs text-indigo'>{errors.fullName}</p>}
         </div>
         <div>
-          <label htmlFor="organization" className="block text-sm font-medium text-navy">
+          <label htmlFor='organization' className='block text-sm font-medium text-midnight-blue'>
             Organization
           </label>
           <input
-            id="organization"
-            type="text"
+            id='organization'
+            type='text'
             className={inputClass}
             value={form.organization}
-            onChange={(e) => update("organization", e.target.value)}
+            onChange={(e) => update('organization', e.target.value)}
           />
         </div>
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className='grid gap-6 sm:grid-cols-2'>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-navy">
-            Email Address <span className="text-orange">*</span>
+          <label htmlFor='email' className='block text-sm font-medium text-midnight-blue'>
+            Email Address <span className='text-indigo'>*</span>
           </label>
           <input
-            id="email"
-            type="email"
+            id='email'
+            type='email'
             className={inputClass}
             value={form.email}
-            onChange={(e) => update("email", e.target.value)}
-            required
+            onChange={(e) => update('email', e.target.value)}
           />
-          {errors.email && <p className="mt-1 text-xs text-orange">{errors.email}</p>}
+          {errors.email && <p className='mt-1 text-xs text-indigo'>{errors.email}</p>}
         </div>
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-navy">
+          <label htmlFor='phone' className='block text-sm font-medium text-midnight-blue'>
             Phone Number
           </label>
           <input
-            id="phone"
-            type="tel"
+            id='phone'
+            type='tel'
             className={inputClass}
             value={form.phone}
-            onChange={(e) => update("phone", e.target.value)}
+            onChange={(e) => update('phone', e.target.value)}
           />
         </div>
       </div>
 
       <div>
-        <label htmlFor="category" className="block text-sm font-medium text-navy">
-          Inquiry Category
+        <label htmlFor='category' className='block text-sm font-medium text-midnight-blue'>
+          Inquiry Category <span className='text-indigo'>*</span>
         </label>
         <select
-          id="category"
+          id='category'
           className={inputClass}
           value={form.category}
-          onChange={(e) => update("category", e.target.value)}
+          onChange={(e) => update('category', e.target.value)}
         >
           {inquiryCategories.map((c) => (
             <option key={c} value={c}>
@@ -173,55 +171,57 @@ export function ContactForm() {
             </option>
           ))}
         </select>
+        {errors.category && <p className='mt-1 text-xs text-indigo'>{errors.category}</p>}
       </div>
 
       <div>
-        <label htmlFor="subject" className="block text-sm font-medium text-navy">
-          Subject <span className="text-orange">*</span>
+        <label htmlFor='subject' className='block text-sm font-medium text-midnight-blue'>
+          Subject <span className='text-indigo'>*</span>
         </label>
         <input
-          id="subject"
-          type="text"
+          id='subject'
+          type='text'
           className={inputClass}
           value={form.subject}
-          onChange={(e) => update("subject", e.target.value)}
-          required
+          onChange={(e) => update('subject', e.target.value)}
         />
-        {errors.subject && <p className="mt-1 text-xs text-orange">{errors.subject}</p>}
+        {errors.subject && <p className='mt-1 text-xs text-indigo'>{errors.subject}</p>}
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-navy">
-          Message <span className="text-orange">*</span>
+        <label htmlFor='message' className='block text-sm font-medium text-midnight-blue'>
+          Message <span className='text-indigo'>*</span>
         </label>
         <textarea
-          id="message"
+          id='message'
           rows={5}
           className={inputClass}
           value={form.message}
-          onChange={(e) => update("message", e.target.value)}
-          required
+          onChange={(e) => update('message', e.target.value)}
         />
-        {errors.message && <p className="mt-1 text-xs text-orange">{errors.message}</p>}
+        {errors.message && <p className='mt-1 text-xs text-indigo'>{errors.message}</p>}
       </div>
 
+      <p className='text-xs text-midnight-blue/50'>
+        Fields marked <span className='text-indigo'>*</span> are required.
+      </p>
+
       <button
-        type="submit"
-        disabled={status === "submitting"}
-        className="inline-flex w-full items-center justify-center rounded-md bg-electric px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-navy disabled:opacity-60 sm:w-auto"
+        type='submit'
+        disabled={status === 'submitting'}
+        className='inline-flex w-full items-center justify-center rounded-md bg-indigo px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-indigo/90 disabled:opacity-60 sm:w-auto'
       >
-        {status === "submitting" ? "Sending..." : "Send Inquiry"}
+        {status === 'submitting' ? 'Sending...' : 'Send Inquiry'}
       </button>
 
-      {status === "success" && (
-        <p className="text-sm font-medium text-green-700">{serverMessage}</p>
+      {status === 'success' && (
+        <p className='text-sm font-medium text-midnight-blue'>{serverMessage}</p>
       )}
-      {status === "error" && (
-        <p className="text-sm font-medium text-orange">{serverMessage}</p>
+      {status === 'error' && (
+        <p className='text-sm font-medium text-indigo'>{serverMessage}</p>
       )}
     </form>
   );
 }
 
 export default ContactForm;
-

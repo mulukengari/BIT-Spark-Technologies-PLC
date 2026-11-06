@@ -11,15 +11,15 @@ type CardProps = {
 export function Card({ title, description, icon, children, className = "" }: CardProps) {
   return (
     <div
-      className={`group rounded-xl border border-navy/10 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-electric/40 hover:shadow-lg ${className}`}
+      className={`rounded-lg border border-indigo/10 bg-card p-6 ${className}`}
     >
       {icon && (
-        <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-lightgray text-electric transition-colors group-hover:bg-electric group-hover:text-white">
+        <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-md bg-snow-white text-indigo">
           {icon}
         </div>
       )}
       {title && <h3 className="text-lg font-semibold text-navy">{title}</h3>}
-      {description && <p className="mt-2 text-sm leading-relaxed text-navy/70">{description}</p>}
+      {description && <p className="mt-2 text-sm leading-relaxed text-foreground">{description}</p>}
       {children}
     </div>
   );
