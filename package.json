@@ -1,0 +1,11 @@
+{
+  "name": "bitspark-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix ./bespoke-site run dev --",
+    "build": "npm --prefix ./bespoke-site run build --",
+    "start": "npm --prefix ./bespoke-site run start --",
+    "lint": "npm --prefix ./bespoke-site run lint --"
+  }
+}
