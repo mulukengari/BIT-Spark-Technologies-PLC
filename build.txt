@@ -1,0 +1,29 @@
+
+> bitspark-technologies@0.1.0 build
+> next build --webpack
+
+Ôû▓ Next.js 16.4.5 (webpack)
+Ô£ô Running next.config.ts took 50ms
+
+  Creating an optimized production build ...
+Failed to compile.
+
+./src/app/about/page.tsx
+Error:   x Expected ';', '}' or <eof>
+   ,-[D:\programming projects\2ndlab\src\app\about\page.tsx:1:1]
+ 1 | At line:3 char:18
+   : ^| ^^^^
+   :  `-- This is the expression part of an expression statement
+ 2 | + import { useState, FormEvent } from 'react';
+ 3 | +                  ~
+ 3 | Missing argument in parameter list.
+   `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/about/page.tsx
+
+
+> Build failed because of webpack errors

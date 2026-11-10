@@ -1,0 +1,10 @@
+
+> bitspark-technologies@0.1.0 lint
+> eslint
+
+
+D:\programming projects\2ndlab\src\app\about\page.tsx
+  1:0  error  Parsing error: Unexpected keyword or identifier
+
+Ô£û 1 problem (1 error, 0 warnings)
+

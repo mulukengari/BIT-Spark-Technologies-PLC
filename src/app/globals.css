@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F8FAFC;
+  --foreground: #172554;
+  --midnight-blue: #172554;
+  --indigo: #4F46E5;
+  --amber: #F59E0B;
+  --snow-white: #F8FAFC;
+  --border: rgba(79, 70, 229, 0.12);
+  --card: #FFFFFF;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-midnight-blue: var(--midnight-blue);
+  --color-indigo: var(--indigo);
+  --color-amber: var(--amber);
+  --color-snow-white: var(--snow-white);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
