@@ -14,6 +14,18 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 
 Edit pages in `src/app`; shared components are in `src/components`.
 
+## SEO deployment configuration
+
+The canonical site origin defaults to `https://bitspark-tech.pro.et`. If the
+production site moves, set `NEXT_PUBLIC_SITE_URL` to its canonical HTTPS origin
+at build time. Keep that value aligned with the domain's redirects and search
+console property; it is used for canonical links, structured data, robots, and
+the sitemap.
+
+The sitemap intentionally lists only substantive, indexable pages. Pages
+marked as demonstrations or placeholders stay out of search until their content
+is ready for publication.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

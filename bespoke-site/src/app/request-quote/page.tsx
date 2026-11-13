@@ -1,8 +1,28 @@
-"use client";
-import {useState} from "react";
 import PageHero from "@/components/PageHero";
-export default function Quote(){
- const[sent,setSent]=useState(false);
- function submit(e:React.FormEvent<HTMLFormElement>){e.preventDefault();setSent(true);}
- return <><PageHero eyebrow="Request a quotation" title="Tell us what you need" description="Share your requirements for hardware, infrastructure, software, installation, or technical support."/><section className="content-section" data-robot-target="quote"><div className="container">{sent?<div className="content-card"><h2>Quotation request received.</h2><p>This is a frontend demonstration. Connect the form to your sales workflow before launch.</p><button className="button button-primary" style={{border:0}} onClick={()=>setSent(false)}>Create another request</button></div>:<form onSubmit={submit} className="form-grid"><div className="field"><label>Full name</label><input required/></div><div className="field"><label>Company</label><input required/></div><div className="field"><label>Email</label><input type="email" required/></div><div className="field"><label>Product or service</label><select required defaultValue=""><option value="" disabled>Select one</option><option>Hardware and devices</option><option>Cloud or infrastructure</option><option>Networking</option><option>Cybersecurity</option><option>Software development</option><option>Support and maintenance</option></select></div><div className="field full"><label>Requirements</label><textarea required rows={7}/></div><div className="field full"><button className="button button-primary" style={{border:0}}>Submit request</button></div></form>}</div></section></>;
+import QuoteRequestForm from "@/components/QuoteRequestForm";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata(
+  "Request an IT Services Quotation",
+  "Prepare a quotation enquiry for IT hardware, infrastructure, cloud, networking, cybersecurity, software, installation, or technical support.",
+  "/request-quote",
+  { index: false }
+);
+
+export default function Quote() {
+  return (
+    <>
+      <PageHero
+        eyebrow="Request a quotation"
+        title="Discuss your technology requirements"
+        description="Review the information we need to scope hardware, infrastructure, software, installation, or technical support."
+      />
+      <section className="content-section" aria-label="Quotation enquiry form">
+        <div className="container">
+          <h2 className="sr-only">Quotation enquiry form</h2>
+          <QuoteRequestForm />
+        </div>
+      </section>
+    </>
+  );
 }

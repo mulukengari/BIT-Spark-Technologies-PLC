@@ -242,17 +242,37 @@ img, svg { display: block; }
 /* Footer */
 .footer { background: var(--navy); color: white; border-top: 2px solid var(--line-dark); }
 .footer-main { min-height: 290px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-top: 64px; } .footer-brand p { max-width: 260px; color: #a0b0be; line-height: 1.6; font-size: 13px; margin-top: 24px; }
-.footer-main h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: white; margin: 0 0 18px; } .footer-main > div:not(:first-child) { border-left: 1px solid var(--line-dark); padding-left: 24px; } .footer-main > div:not(:first-child) a { display: flex; align-items: center; gap: 4px; color: #a6b6c4; font-size: 13px; margin: 11px 0; } .footer-main a:hover { color: var(--accent-light); }
+.footer-main h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: white; margin: 0 0 18px; } .footer-main > div:not(:first-child) { border-left: 1px solid var(--line-dark); padding-left: 24px; } .footer-main > div:not(:first-child) a { display: flex; align-items: center; gap: 4px; color: #a6b6c4; font-size: 13px; margin: 11px 0; } .footer-main a:hover { color: var(--accent-light); }
 .footer-bottom { height: 70px; border-top: 1px solid var(--line-dark); display: flex; align-items: center; justify-content: space-between; color: #a6b5c1; font-size: 12px; } .footer-bottom div { display: flex; gap: 20px; }
 
 /* Interior pages */
-.page-hero { min-height: 330px; background: var(--navy-2); color: white; display: flex; align-items: center; border-bottom: 2px solid var(--line-dark); }
+.page-hero { position: relative; min-height: 330px; background: var(--navy-2); color: white; display: flex; align-items: center; border-bottom: 2px solid var(--line-dark); }
+.page-hero-breadcrumbs { position: absolute; top: 22px; left: 50%; transform: translateX(-50%); }
+.breadcrumbs ol { display: flex; flex-wrap: wrap; gap: 9px; margin: 0; padding: 0; list-style: none; }
+.breadcrumbs li { display: flex; align-items: center; gap: 9px; color: #d3e2ef; font-size: 12px; }
+.breadcrumbs a { color: #b7c9d8; text-decoration: none; }
+.breadcrumbs a:hover { color: white; text-decoration: underline; }
+.breadcrumb-separator { color: #7f9bb2; }
 .page-hero h1 { font-size: 52px; letter-spacing: -2.5px; margin: 14px 0 12px; } .page-hero .kicker { color: var(--accent-light); } .page-hero p { color: #c0ced8; max-width: 680px; line-height: 1.7; }
 .content-section { padding: 80px 0; background: var(--surface); border-bottom: 1px solid var(--line); }
 .content-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-.content-card { border: 1px solid var(--line); padding: 28px; border-radius: 4px; background: white; } .content-card h2, .content-card h3 { color: var(--ink); } .content-card p { color: var(--body); line-height: 1.65; }
+.content-card { border: 1px solid var(--line); padding: 28px; border-radius: 4px; background: white; } .content-card h2, .content-card h3 { color: var(--ink); } .content-card h2 { margin-top: 0; font-size: 20px; } .content-card p { color: var(--body); line-height: 1.65; }
 .form-grid { max-width: 760px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .field { display: flex; flex-direction: column; gap: 7px; } .field.full { grid-column: 1 / -1; } .field label { font-size: 12px; font-weight: 800; color: var(--ink); } .field input, .field textarea, .field select { border: 1px solid var(--line); border-radius: 4px; padding: 13px 14px; background: white; color: var(--ink); outline: none; } .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px #d9f1f7; }
+.generic-page-cta { margin-top: 40px; text-align: center; }
+.contact-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 70px; }
+.contact-layout h2 { margin: 12px 0; color: var(--ink); font-size: 34px; }
+.contact-layout p { color: var(--body); line-height: 1.8; }
+.product-filters { display: flex; align-items: center; gap: 18px; margin-bottom: 28px; }
+.product-search { position: relative; flex: 1; max-width: 430px; }
+.product-search > svg { position: absolute; top: 14px; left: 13px; color: #718096; }
+.product-search input, .product-category select { height: 44px; border: 1px solid #ccd8df; border-radius: 4px; background: white; color: var(--ink); }
+.product-search input { width: 100%; padding: 0 14px 0 40px; }
+.product-category { display: flex; align-items: center; gap: 8px; }
+.product-category label { color: var(--ink); font-size: 12px; font-weight: 700; }
+.product-category select { padding: 0 12px; }
+.sample-product-art { display: flex; height: 150px; align-items: center; justify-content: center; border-radius: 3px; background: #eef4f7; color: #65778a; font-size: 12px; font-weight: 800; }
+.product-category-label { display: block; margin-top: 18px; color: #087ea4; font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
 
 @media (max-width: 900px) {
   .container { width: min(100% - 32px, 1180px); }
@@ -329,6 +349,10 @@ img, svg { display: block; }
   .systems-visual { height: 390px; margin-left: 0; width: 100%; } .trust-grid strong { font-size: 14px; }
   .section-heading { align-items: flex-start; gap: 20px; } .section-heading h2, .why-copy h2, .cta-box h2 { font-size: 34px; } .section-heading > .text-link { flex: none; white-space: nowrap; }
   .service-grid, .industry-grid, .content-grid { grid-template-columns: 1fr; } .operations-panel { display: none; } .why-grid { gap: 0; } .cta-actions { width: 100%; flex-direction: column; }
+  .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+  .product-filters { align-items: stretch; flex-direction: column; }
+  .product-search { max-width: none; }
+  .product-category { align-items: flex-start; flex-direction: column; }
   .footer-main { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } .footer-main > div:not(:first-child) { border-left: 0; padding-left: 0; } .footer-main > div:last-child { display: block; } .footer-bottom { height: 90px; }
   .form-grid { grid-template-columns: 1fr; } .field.full { grid-column: auto; } .cta-box { padding: 22px; }
 }
@@ -420,7 +444,7 @@ p, small, label, input, textarea, select { font-family: inherit; }
 
 .footer { border-top-color: #263b52; }
 .footer-main > div:not(:first-child) { border-left-color: #263b52; }
-.footer-main h3 { color: #f8fafc; }
+.footer-main h2 { color: #f8fafc; }
 .footer-main > div:not(:first-child) a, .footer-brand p, .footer-bottom { color: #a8b6c7; }
 .footer-main a:hover { color: #38bdf8; }
 
@@ -1462,7 +1486,7 @@ body { background: #08111f; color: #f8fafc; }
   z-index: 1;
   width: 76px;
   height: 88px;
-  animation: robot-celebrate 2.4s ease-in-out infinite;
+  animation: none;
   transform-origin: center bottom;
 }
 .robot-mascot {
@@ -1476,7 +1500,7 @@ body { background: #08111f; color: #f8fafc; }
 .robot-head-group {
   transform-box: fill-box;
   transform-origin: 50% 85%;
-  animation: robot-head-tilt 2.4s ease-in-out infinite;
+  animation: none;
 }
 .robot-wave-arm {
   fill: none;
@@ -1485,7 +1509,7 @@ body { background: #08111f; color: #f8fafc; }
   stroke-width: 3;
   transform-box: view-box;
   transform-origin: 65px 74px;
-  animation: robot-wave 1.15s ease-in-out infinite;
+  animation: none;
 }
 .robot-left-arm,
 .robot-foot {
@@ -1502,7 +1526,7 @@ body { background: #08111f; color: #f8fafc; }
   border: 2px solid #5ccaff;
   border-radius: 2px;
   opacity: 0;
-  animation: robot-sparkle 1.8s ease-in-out infinite;
+  animation: none;
 }
 .robot-spark-one {
   top: 28px;
@@ -1518,7 +1542,7 @@ body { background: #08111f; color: #f8fafc; }
 .robot-orbit {
   transform-box: view-box;
   transform-origin: 44px 50px;
-  animation: robot-world-spin 9s linear infinite;
+  animation: none;
 }
 .robot-orbit-line {
   fill: none;
@@ -1560,7 +1584,7 @@ body { background: #08111f; color: #f8fafc; }
   fill: #07395f;
   transform-box: fill-box;
   transform-origin: center;
-  animation: robot-blink 4s ease-in-out infinite;
+  animation: none;
 }
 .robot-eye:nth-of-type(3) { animation-delay: .08s; }
 .robot-smile {
@@ -1581,7 +1605,7 @@ body { background: #08111f; color: #f8fafc; }
 .robot-antenna-light {
   transform-box: fill-box;
   transform-origin: center;
-  animation: robot-signal .8s ease-in-out infinite;
+  animation: none;
 }
 /*
   The character has its own animation layer so the orbit can rotate independently
@@ -1598,7 +1622,7 @@ body { background: #08111f; color: #f8fafc; }
   border-bottom: 3px solid var(--accent-strong);
   transform: translateX(-50%) rotate(45deg);
   filter: drop-shadow(0 2px 3px rgba(4, 29, 49, .16));
-  animation: robot-arrow-bounce 1s ease-in-out infinite;
+  animation: none;
 }
 /*
   Orbit and arrow motion amplify the robot's movement as visual scrolling cues.
@@ -1621,7 +1645,7 @@ body { background: #08111f; color: #f8fafc; }
   border-bottom: 2px solid rgba(11, 142, 216, .78);
   transform: rotate(45deg);
   opacity: 0;
-  animation: robot-trail-flow 1.5s ease-in-out infinite;
+  animation: none;
 }
 .robot-guide-trail i:nth-child(2) { animation-delay: .18s; }
 .robot-guide-trail i:nth-child(3) { animation-delay: .36s; }
@@ -2034,9 +2058,29 @@ body { background: #08111f; color: #f8fafc; }
   outline: 3px solid var(--accent-light);
   outline-offset: 3px;
 }
-.robot-guide-button:hover .robot-character,
-.robot-guide-button:focus-visible .robot-character {
-  animation-duration: 1.25s;
+.robot-companion.is-active .robot-character {
+  animation: robot-celebrate 2.4s ease-in-out infinite;
+}
+.robot-companion.is-active .robot-head-group {
+  animation: robot-head-tilt 2.4s ease-in-out infinite;
+}
+.robot-companion.is-active .robot-wave-arm {
+  animation: robot-wave 1.15s ease-in-out infinite;
+}
+.robot-companion.is-active .robot-spark {
+  animation: robot-sparkle 1.8s ease-in-out infinite;
+}
+.robot-companion.is-active .robot-orbit {
+  animation: robot-world-spin 9s linear infinite;
+}
+.robot-companion.is-active .robot-eye {
+  animation: robot-blink 4s ease-in-out infinite;
+}
+.robot-companion.is-active .robot-antenna-light {
+  animation: robot-signal .8s ease-in-out infinite;
+}
+.robot-companion.is-active .robot-guide-trail i {
+  animation: robot-trail-flow 1.5s ease-in-out infinite;
 }
 .robot-highlighted {
   position: relative;

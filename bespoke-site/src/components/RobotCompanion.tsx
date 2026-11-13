@@ -1,14 +1,7 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { type CSSProperties, type FormEvent, useCallback, useEffect, useRef, useState } from "react";
-
-type GuideTip = {
-  key: string;
-  title: string;
-  body: string;
-  target: HTMLElement | null;
-};
 
 type ChatMessage = {
   role: "visitor" | "robot";
@@ -17,8 +10,6 @@ type ChatMessage = {
 
 const DISMISSED_KEY = "bitspark-guide-dismissed";
 const PAUSED_KEY = "bitspark-guide-paused";
-const GREETED_KEY = "bitspark-guide-greeted";
-const SEEN_KEY = "bitspark-guide-seen";
 const CHAT_KEY = "bitspark-guide-chat";
 const QUICK_REPLIES = [
   { label: "Services", path: "/services", target: "services" },
@@ -27,40 +18,6 @@ const QUICK_REPLIES = [
   { label: "Contact", path: "/contact", target: "contact" },
   { label: "Request a quote", path: "/request-quote", target: "quote" },
 ];
-
-function shorten(text: string, wordLimit = 20) {
-  const words = text.trim().split(/\s+/);
-  return words.length > wordLimit ? `${words.slice(0, wordLimit).join(" ")}…` : text.trim();
-}
-
-function makeTip(target: HTMLElement, key?: string): GuideTip {
-  const heading = target.querySelector("h3, h2, h1");
-  const description = target.dataset.robotTip || target.querySelector("p")?.textContent || "";
-  const title = target.dataset.robotTitle || heading?.textContent?.trim() || "Explore our services";
-  const targetKey = key || target.dataset.robotTarget || target.id || title.toLowerCase().replace(/\W+/g, "-");
-
-  return {
-    key: targetKey,
-    title,
-    body: shorten(description || "Explore practical technology solutions designed around your organization's needs."),
-    target,
-  };
-}
-
-function readSessionList(key: string) {
-  const stored = sessionStorage.getItem(key);
-  if (!stored) return [];
-  try {
-    const parsed: unknown = JSON.parse(stored);
-    return Array.isArray(parsed) && parsed.every((value) => typeof value === "string")
-      ? parsed
-      : [];
-  } catch (error) {
-    console.error(`Unable to read robot guide session data (${key}).`, error);
-    sessionStorage.removeItem(key);
-    return [];
-  }
-}
 
 function isChatMessageArray(value: unknown): value is ChatMessage[] {
   return (
@@ -91,31 +48,18 @@ function readChat() {
 }
 
 export default function RobotCompanion() {
-  const pathname = usePathname();
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const [paused, setPaused] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
-  const [tip, setTip] = useState<GuideTip | null>(null);
-  const [showTip, setShowTip] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [question, setQuestion] = useState("");
   const [pointingTarget, setPointingTarget] = useState<HTMLElement | null>(null);
-  const [hoverCue, setHoverCue] = useState(false);
   const [formFocused, setFormFocused] = useState(false);
   const chatInputRef = useRef<HTMLInputElement>(null);
-  const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const highlightTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const highlightedTargetRef = useRef<HTMLElement | null>(null);
-
-  const revealTip = useCallback((nextTip: GuideTip, duration = 7000) => {
-    if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
-    setTip(nextTip);
-    setShowTip(true);
-    hideTimerRef.current = setTimeout(() => setShowTip(false), duration);
-  }, []);
 
   const saveMessages = useCallback((next: ChatMessage[]) => {
     const recent = next.slice(-30);
@@ -124,31 +68,15 @@ export default function RobotCompanion() {
   }, []);
 
   useEffect(() => {
-    let greetingTimer: ReturnType<typeof setTimeout> | null = null;
     const initializeTimer = setTimeout(() => {
       const isDismissed = sessionStorage.getItem(DISMISSED_KEY) === "true";
       setDismissed(isDismissed);
       setPaused(sessionStorage.getItem(PAUSED_KEY) === "true");
       setMessages(readChat());
       setMounted(true);
-
-      if (!isDismissed && sessionStorage.getItem(GREETED_KEY) !== "true") {
-        greetingTimer = setTimeout(() => {
-          sessionStorage.setItem(GREETED_KEY, "true");
-          revealTip({
-            key: "welcome",
-            title: "Welcome to BIT Spark!",
-            body: "I can help you explore our services, industries, and project experience.",
-            target: null,
-          });
-        }, 900);
-      }
     }, 0);
-    return () => {
-      clearTimeout(initializeTimer);
-      if (greetingTimer) clearTimeout(greetingTimer);
-    };
-  }, [revealTip]);
+    return () => clearTimeout(initializeTimer);
+  }, []);
 
   useEffect(() => {
     const toggleWithShortcut = (event: KeyboardEvent) => {
@@ -159,15 +87,8 @@ export default function RobotCompanion() {
           if (next) {
             sessionStorage.setItem(DISMISSED_KEY, "true");
             setChatOpen(false);
-            setShowTip(false);
           } else {
             sessionStorage.removeItem(DISMISSED_KEY);
-            revealTip({
-              key: "welcome-back",
-              title: "Welcome back!",
-              body: "Choose a topic or keep exploring and I’ll point out useful details.",
-              target: null,
-            });
           }
           return next;
         });
@@ -176,110 +97,7 @@ export default function RobotCompanion() {
 
     window.addEventListener("keydown", toggleWithShortcut);
     return () => window.removeEventListener("keydown", toggleWithShortcut);
-  }, [revealTip]);
-
-  useEffect(() => {
-    if (!mounted || dismissed || chatOpen) return;
-
-    const seen = new Set(readSessionList(SEEN_KEY));
-    const dwellTimers = new Map<HTMLElement, ReturnType<typeof setTimeout>>();
-    const sections = Array.from(
-      document.querySelectorAll<HTMLElement>("main section[data-robot-target]")
-    );
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const section = entry.target as HTMLElement;
-          const minimumRatio = section.offsetHeight > window.innerHeight * 0.9 ? 0.2 : 0.5;
-          const timer = dwellTimers.get(section);
-
-          if (!entry.isIntersecting || entry.intersectionRatio < minimumRatio) {
-            if (timer) clearTimeout(timer);
-            dwellTimers.delete(section);
-            return;
-          }
-          if (timer) return;
-
-          const timerId = setTimeout(() => {
-            dwellTimers.delete(section);
-            const targetId = section.dataset.robotTarget;
-            if (!targetId) return;
-            const seenKey = targetId;
-            if (seen.has(seenKey) || sessionStorage.getItem(DISMISSED_KEY) === "true") return;
-            seen.add(seenKey);
-            sessionStorage.setItem(SEEN_KEY, JSON.stringify([...seen]));
-            const visibleTarget = Array.from(
-              section.querySelectorAll<HTMLElement>("[data-robot-target]")
-            ).find((item) => {
-              const rect = item.getBoundingClientRect();
-              return rect.bottom > 0 && rect.top < window.innerHeight;
-            });
-            const tipTarget = visibleTarget ?? section;
-            setPointingTarget(tipTarget);
-            setHoverCue(false);
-            revealTip(makeTip(tipTarget, seenKey));
-          }, 1000);
-          dwellTimers.set(section, timerId);
-        });
-      },
-      { threshold: [0, 0.2, 0.5] }
-    );
-
-    sections.forEach((section) => observer.observe(section));
-    return () => {
-      observer.disconnect();
-      dwellTimers.forEach((timer) => clearTimeout(timer));
-      if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
-    };
-  }, [chatOpen, dismissed, mounted, pathname, revealTip]);
-
-  useEffect(() => {
-    if (!mounted || dismissed) return;
-
-    const findTarget = (event: Event) =>
-      (event.target as HTMLElement | null)?.closest<HTMLElement>("[data-robot-target]") ?? null;
-
-    const onClick = (event: MouseEvent) => {
-      const target = findTarget(event);
-      if (target && !target.closest(".robot-companion")) {
-        const key = `${pathname}:${target.dataset.robotTarget || target.id || "target"}`;
-        revealTip(makeTip(target, key), 5000);
-        setPointingTarget(target);
-        setHoverCue(false);
-      }
-    };
-
-    const onPointerOver = (event: PointerEvent) => {
-      const target = findTarget(event);
-      if (!target || target.closest(".robot-companion")) return;
-      if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
-      hoverTimerRef.current = setTimeout(() => {
-        setPointingTarget(target);
-        setHoverCue(true);
-      }, 800);
-    };
-
-    const onPointerOut = (event: PointerEvent) => {
-      const target = findTarget(event);
-      const relatedTarget = event.relatedTarget;
-      if (!target || (relatedTarget instanceof Node && target.contains(relatedTarget))) return;
-      if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
-      hoverTimerRef.current = setTimeout(() => {
-        setPointingTarget(null);
-        setHoverCue(false);
-      }, 300);
-    };
-
-    document.addEventListener("click", onClick);
-    document.addEventListener("pointerover", onPointerOver);
-    document.addEventListener("pointerout", onPointerOut);
-    return () => {
-      document.removeEventListener("click", onClick);
-      document.removeEventListener("pointerover", onPointerOver);
-      document.removeEventListener("pointerout", onPointerOut);
-      if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
-    };
-  }, [dismissed, mounted, pathname, revealTip]);
+  }, []);
 
   useEffect(() => {
     if (!mounted || dismissed) return;
@@ -311,8 +129,6 @@ export default function RobotCompanion() {
 
   useEffect(
     () => () => {
-      if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
-      if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
       if (highlightTimerRef.current) clearTimeout(highlightTimerRef.current);
       highlightedTargetRef.current?.classList.remove("robot-highlighted");
     },
@@ -336,9 +152,7 @@ export default function RobotCompanion() {
       highlightedTargetRef.current = null;
     }, 4000);
     setPointingTarget(target);
-    setHoverCue(false);
     setChatOpen(false);
-    setShowTip(false);
   };
 
   const guideTo = (option: (typeof QUICK_REPLIES)[number], selectedText = option.label) => {
@@ -358,7 +172,6 @@ export default function RobotCompanion() {
       pointOut(target);
     } else {
       setChatOpen(false);
-      setShowTip(false);
       router.push(option.path);
     }
   };
@@ -407,7 +220,6 @@ export default function RobotCompanion() {
     sessionStorage.setItem(DISMISSED_KEY, "true");
     setDismissed(true);
     setChatOpen(false);
-    setShowTip(false);
   };
 
   const togglePause = () => {
@@ -420,7 +232,7 @@ export default function RobotCompanion() {
 
   if (!mounted || dismissed) return null;
 
-  const targetBounds = hoverCue ? null : pointingTarget?.getBoundingClientRect();
+  const targetBounds = pointingTarget?.getBoundingClientRect();
   const shiftX =
     window.innerWidth >= 768 && targetBounds && targetBounds.left > window.innerWidth * 0.62
       ? -100
@@ -439,28 +251,10 @@ export default function RobotCompanion() {
 
   return (
     <aside
-      className={`robot-companion${paused ? " is-paused" : ""}${formFocused ? " is-form-focused" : ""}`}
+      className={`robot-companion${paused ? " is-paused" : ""}${formFocused ? " is-form-focused" : ""}${chatOpen ? " is-active" : ""}`}
       aria-label="BIT Spark interactive website guide"
       style={robotStyle}
     >
-      {showTip && tip && !chatOpen && (
-        <div className="robot-speech" role="status" aria-live="polite">
-          <button className="robot-dismiss" type="button" onClick={() => setShowTip(false)} aria-label="Close guide tip">×</button>
-          <span className="robot-speech-kicker">BIT SPARK GUIDE</span>
-          <strong>{tip.title}</strong>
-          <p>{tip.body}</p>
-          {tip.target && (
-            <button type="button" className="robot-speech-action" onClick={() => pointOut(tip.target)}>
-              Point it out <span aria-hidden="true">↓</span>
-            </button>
-          )}
-          {tip.key === "welcome" && (
-            <button type="button" className="robot-speech-action" onClick={() => setChatOpen(true)}>
-              Choose a topic <span aria-hidden="true">→</span>
-            </button>
-          )}
-        </div>
-      )}
       {chatOpen && (
         <section className="robot-chat" aria-label="Chat with the BIT Spark guide">
           <header className="robot-chat-header">
@@ -504,7 +298,6 @@ export default function RobotCompanion() {
           className="robot-guide-button"
           type="button"
           onClick={() => {
-            setShowTip(false);
             setChatOpen((open) => !open);
           }}
           aria-label={chatOpen ? "Close robot guide chat" : "Open robot guide chat"}

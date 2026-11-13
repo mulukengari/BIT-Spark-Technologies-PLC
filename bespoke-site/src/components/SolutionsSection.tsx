@@ -21,8 +21,6 @@ export default function SolutionsSection() {
         </div>
         <div className="solutions-grid">
           {solutionCategories.map((category) => {
-            const Icon = category.icon;
-
             return (
               <article
                 className={`solution-card solution-${category.visual}`}
@@ -31,16 +29,14 @@ export default function SolutionsSection() {
                 data-robot-tip={category.description}
                 key={category.slug}
               >
-                <div className="solution-art" aria-hidden="true">
+                <div className="solution-art">
                   <Image
                     className="solution-art-image"
                     src={`/servicesImages/${encodeURIComponent(category.image)}`}
-                    alt=""
+                    alt={`${category.title} enterprise IT solutions`}
                     fill
                     sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
                   />
-                  <span className="solution-art-icon"><Icon size={42} strokeWidth={1.5} /></span>
-                  <span className="solution-art-index">{category.number}</span>
                 </div>
                 <div className="solution-card-content">
                   <span className="solution-number">{category.number} / SOLUTION</span>
@@ -52,7 +48,7 @@ export default function SolutionsSection() {
                     ))}
                   </ul>
                   <Link className="solution-link" href={`/services/${category.slug}`}>
-                    Explore solution <ArrowUpRight size={17} aria-hidden="true" />
+                    Explore {category.title} <ArrowUpRight size={17} aria-hidden="true" />
                   </Link>
                 </div>
               </article>

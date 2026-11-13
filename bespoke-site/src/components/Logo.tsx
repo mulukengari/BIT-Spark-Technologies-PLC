@@ -8,7 +8,6 @@ export default function Logo() {
         alt="BIT SPARK Technologies logo"
         width={260}
         height={90}
-        priority
         className="brand-image"
       />
     </span>

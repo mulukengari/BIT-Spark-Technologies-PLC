@@ -1,2 +1,11 @@
 import PageHero from "@/components/PageHero";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata(
+  "Website Terms and Conditions",
+  "Read the website-use terms for BIT Spark Technologies, including guidance on quotations, product availability, service information, and site content.",
+  "/terms",
+  { index: false }
+);
+
 export default function Terms(){return <><PageHero eyebrow="Legal" title="Terms and conditions" description="A sample terms template that requires legal and commercial review before publication."/><section className="content-section"><div className="container content-card"><h2>Website terms</h2><p>Product descriptions, partnership claims, statistics, testimonials, pricing, and service availability on this demonstration site must be verified before publication. Add approved terms covering website use, disclaimers, intellectual property, liability, quotations, and governing law.</p></div></section></>}

@@ -1,13 +1,3 @@
-import {
-  Boxes,
-  CloudCog,
-  Headset,
-  Network,
-  ShieldCheck,
-  Workflow,
-  type LucideIcon,
-} from "lucide-react";
-
 export type SolutionCategory = {
   number: string;
   title: string;
@@ -15,7 +5,6 @@ export type SolutionCategory = {
   description: string;
   services: string[];
   image: string;
-  icon: LucideIcon;
   visual: string;
 };
 
@@ -34,7 +23,6 @@ export const solutionCategories: SolutionCategory[] = [
       "Data Center Power, Rack and Cooling Solutions",
     ],
     image: "Data Center & Infrastructure.png",
-    icon: Boxes,
     visual: "infrastructure",
   },
   {
@@ -51,7 +39,6 @@ export const solutionCategories: SolutionCategory[] = [
       "Cloud Management and Automation",
     ],
     image: "CloudComputing.png",
-    icon: CloudCog,
     visual: "cloud",
   },
   {
@@ -68,7 +55,6 @@ export const solutionCategories: SolutionCategory[] = [
       "Unified Communications and Collaboration",
     ],
     image: "EnterpriseNetworking.png",
-    icon: Network,
     visual: "network",
   },
   {
@@ -85,7 +71,6 @@ export const solutionCategories: SolutionCategory[] = [
       "Security Operations and Incident Response",
     ],
     image: "CyberSecurity.png",
-    icon: ShieldCheck,
     visual: "security",
   },
   {
@@ -102,7 +87,6 @@ export const solutionCategories: SolutionCategory[] = [
       "Business Intelligence and Analytics",
     ],
     image: "Software&automation.png",
-    icon: Workflow,
     visual: "software",
   },
   {
@@ -119,7 +103,6 @@ export const solutionCategories: SolutionCategory[] = [
       "IT Consulting and Outsourcing",
     ],
     image: "ITManageServices.png",
-    icon: Headset,
     visual: "support",
   },
 ];

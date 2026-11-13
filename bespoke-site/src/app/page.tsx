@@ -1,21 +1,24 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import Entrance from "@/components/Entrance";
 import SolutionsSection from "@/components/SolutionsSection";
 import PartnersOverview from "@/components/PartnersOverview";
+import { industrySolutions } from "@/lib/industries";
 import {
   ArrowRight,
   ChevronRight,
 } from "lucide-react";
+import { createPageMetadata } from "@/lib/seo";
 
-const industries = [
-  { title: "Financial services", text: "Secure, compliant technology for resilient operations and protected data." },
-  { title: "Government", text: "Reliable infrastructure and systems designed for public-sector accountability." },
-  { title: "Education", text: "Connected campus environments built for students, staff, and institutions." },
-  { title: "Healthcare", text: "Technology foundations that support continuity, privacy, and clinical efficiency." },
-  { title: "Telecommunications", text: "Scalable networks and platforms for high-performance digital services." },
-  { title: "Enterprise & SME", text: "Right-sized solutions that improve operations and support sustainable growth." },
-];
+export const metadata: Metadata = {
+  ...createPageMetadata(
+    "Enterprise IT Solutions",
+    "BIT Spark Technologies delivers enterprise IT infrastructure, cloud, networking, cybersecurity, software, and managed services for modern organizations.",
+    "/"
+  ),
+  title: { absolute: "Enterprise IT Solutions | BIT Spark Technologies" },
+};
 
 export default function Home() {
   return (
@@ -32,7 +35,7 @@ export default function Home() {
         <div className="hero-grid container">
           <Entrance className="hero-copy" delay={0.08}>
             <span className="kicker">Welcome to BIT Spark Technologies</span>
-            <h1>Your System, Our Spark</h1>
+            <h1>Enterprise IT Solutions, Built for Your Business</h1>
             <div className="hero-actions">
               <Link className="button button-primary" href="/services">
                 Explore Our Solutions
@@ -62,16 +65,16 @@ export default function Home() {
             <Link className="text-link" href="/industries">Explore industries <ArrowRight size={17} /></Link>
           </div>
           <div className="industry-grid">
-            {industries.map((industry, index) => (
+            {industrySolutions.map((industry, index) => (
               <Link
-                href="/industries"
+                href={`/industries/${industry.slug}`}
                 className="industry-card"
-                key={industry.title}
-                data-robot-target={industry.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
-                data-robot-tip={industry.text}
+                key={industry.slug}
+                data-robot-target={industry.slug}
+                data-robot-tip={industry.summary}
               >
                 <span className="industry-number">0{index + 1}</span>
-                <div><h3>{industry.title}</h3><p>{industry.text}</p></div>
+                <div><h3>{industry.cardTitle}</h3><p>{industry.summary}</p></div>
                 <span className="industry-arrow"><ChevronRight size={18} /></span>
               </Link>
             ))}

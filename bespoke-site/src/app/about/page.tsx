@@ -1,3 +1,11 @@
 import GenericPage from "@/components/GenericPage";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata(
+  "About Us",
+  "Meet BIT Spark Technologies and learn about our enterprise IT expertise, practical delivery approach, and support for modern business technology.",
+  "/about"
+);
+
 export default function About(){return <GenericPage eyebrow="About us" title="Technology expertise with a business perspective" description="BIT Spark Technologies is positioned to help organizations plan, procure, implement, and support modern enterprise technology." cards={[
  {title:"Our vision",text:"To be a trusted technology partner delivering dependable solutions that make organizations more capable and competitive."},{title:"Our mission",text:"To bring infrastructure, software, security, and support together through practical, well-engineered delivery."},{title:"Our approach",text:"We listen first, assess the environment, define clear priorities, and build measurable implementation plans."},{title:"Core expertise",text:"Cloud platforms, enterprise networking, storage, cybersecurity, hardware deployment, software, and technical support."},{title:"Our values",text:"Technical integrity, customer focus, reliability, clear communication, and continuous improvement."},{title:"How we work",text:"Discovery, solution design, validation, deployment, handover, and support—each stage documented clearly."}]}/>}
