@@ -1,4 +1,6 @@
-export const faqItems = [
+import type { FAQEntry } from "@/lib/seo";
+
+export const faqItems: FAQEntry[] = [
   {
     question: "What services do you provide?",
     answer:

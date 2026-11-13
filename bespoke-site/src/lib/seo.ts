@@ -12,8 +12,28 @@ export type BreadcrumbItem = {
   path: string;
 };
 
+export type FAQEntry = {
+  question: string;
+  answer: string;
+};
+
 export function getAbsoluteUrl(pathname: string): string {
   return new URL(pathname.replace(/^\/+/, ""), `${SITE_URL}/`).toString();
+}
+
+export function createFAQPageStructuredData(items: readonly FAQEntry[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map(({ question, answer }) => ({
+      "@type": "Question",
+      name: question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: answer,
+      },
+    })),
+  };
 }
 
 export function createBreadcrumbStructuredData(

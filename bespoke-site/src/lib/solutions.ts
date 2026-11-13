@@ -7,6 +7,7 @@ export type SolutionCategory = {
   overview: string;
   services: string[];
   outcomes: string[];
+  faqs: { question: string; answer: string }[];
   image: string;
   visual: string;
 };
@@ -33,6 +34,18 @@ export const solutionCategories: SolutionCategory[] = [
       "A practical basis for resilience, backup, and disaster recovery planning",
       "Coordinated deployment of compute, storage, rack, power, and cooling",
     ],
+    faqs: [
+      {
+        question: "What does data center infrastructure work include?",
+        answer:
+          "It can include data center design, servers, enterprise storage, hyper-converged infrastructure, backup and disaster recovery, and rack, power, and cooling planning.",
+      },
+      {
+        question: "How should an organization plan a data center upgrade?",
+        answer:
+          "Start by documenting workload, capacity, facility, resilience, and operating requirements. Those requirements help shape the compute, storage, power, cooling, and recovery design.",
+      },
+    ],
     image: "Data Center & Infrastructure.png",
     visual: "infrastructure",
   },
@@ -56,6 +69,18 @@ export const solutionCategories: SolutionCategory[] = [
       "Cloud and compute options assessed against workload requirements",
       "Migration and integration planned around applications and data",
       "Storage, backup, and management needs considered as part of the design",
+    ],
+    faqs: [
+      {
+        question: "What cloud environments can you help plan?",
+        answer:
+          "The service scope includes private, public, and hybrid cloud, alongside virtualization, cloud management, and enterprise storage planning.",
+      },
+      {
+        question: "What should be considered before migrating a workload?",
+        answer:
+          "Review application and data dependencies, security, integration, backup, and operational needs before deciding migration scope and sequencing.",
+      },
     ],
     image: "CloudComputing.png",
     visual: "cloud",
@@ -81,6 +106,18 @@ export const solutionCategories: SolutionCategory[] = [
       "Connectivity and wireless coverage planned across locations",
       "Monitoring and management considered throughout the network lifecycle",
     ],
+    faqs: [
+      {
+        question: "What does enterprise networking cover?",
+        answer:
+          "Enterprise networking can cover LAN and WAN, wireless LAN, routing and switching, software-defined networking, network monitoring, and unified communications.",
+      },
+      {
+        question: "What information helps plan a multi-site network?",
+        answer:
+          "Document locations, users, applications, wired and wireless needs, connectivity dependencies, and network operations requirements to guide the architecture.",
+      },
+    ],
     image: "EnterpriseNetworking.png",
     visual: "network",
   },
@@ -104,6 +141,18 @@ export const solutionCategories: SolutionCategory[] = [
       "Security priorities identified across infrastructure and user access",
       "Protection and recovery controls considered together",
       "Monitoring and incident-response responsibilities made clearer",
+    ],
+    faqs: [
+      {
+        question: "What areas can cybersecurity planning include?",
+        answer:
+          "The service scope includes network and endpoint security, firewalls, identity and access management, security assessment, data protection, and incident response.",
+      },
+      {
+        question: "How do cybersecurity and data protection work together?",
+        answer:
+          "Security controls help protect systems and data, while backup and recovery planning addresses how the organization can restore data and services after disruption.",
+      },
     ],
     image: "CyberSecurity.png",
     visual: "security",
@@ -129,6 +178,18 @@ export const solutionCategories: SolutionCategory[] = [
       "Integration needs considered across applications and data",
       "Automation and reporting opportunities defined around real workflows",
     ],
+    faqs: [
+      {
+        question: "What business software and automation services are included?",
+        answer:
+          "The scope can include ERP, Microsoft 365 and digital workplace, business process automation, software development, API integration, and business intelligence.",
+      },
+      {
+        question: "Where should a business start with process automation?",
+        answer:
+          "Map the current workflow, systems, data, and handoffs first. This helps identify practical automation and integration opportunities without assuming every step should be automated.",
+      },
+    ],
     image: "Software&automation.png",
     visual: "software",
   },
@@ -152,6 +213,18 @@ export const solutionCategories: SolutionCategory[] = [
       "Infrastructure priorities and support requirements documented",
       "Installation, maintenance, and monitoring responsibilities defined",
       "Technical support aligned to the organization's operating needs",
+    ],
+    faqs: [
+      {
+        question: "What can managed IT services cover?",
+        answer:
+          "Support may cover infrastructure assessment, installation and configuration, preventive and corrective maintenance, monitoring, troubleshooting, consulting, and outsourcing.",
+      },
+      {
+        question: "How should an organization define its IT support scope?",
+        answer:
+          "Identify the systems and locations in scope, current support needs, maintenance and monitoring responsibilities, and the response expectations that fit daily operations.",
+      },
     ],
     image: "ITManageServices.png",
     visual: "support",

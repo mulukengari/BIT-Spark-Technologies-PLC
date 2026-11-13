@@ -1,7 +1,7 @@
 import GenericPage from "@/components/GenericPage";
 import StructuredData from "@/components/StructuredData";
 import { faqItems } from "@/lib/faq";
-import { createPageMetadata } from "@/lib/seo";
+import { createFAQPageStructuredData, createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata(
   "IT Services FAQs",
@@ -10,22 +10,9 @@ export const metadata = createPageMetadata(
 );
 
 export default function FAQ() {
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqItems.map(({ question, answer }) => ({
-      "@type": "Question",
-      name: question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: answer,
-      },
-    })),
-  };
-
   return (
     <>
-      <StructuredData data={faqSchema} />
+      <StructuredData data={createFAQPageStructuredData(faqItems)} />
       <GenericPage
         eyebrow="Frequently asked questions"
         title="Answers to common IT services questions"

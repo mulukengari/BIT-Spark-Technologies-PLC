@@ -4,7 +4,12 @@ import PageHero from "@/components/PageHero";
 import StructuredData from "@/components/StructuredData";
 import { servicePageNames } from "@/lib/service-pages";
 import { solutionCategories } from "@/lib/solutions";
-import { createPageMetadata, SITE_NAME, SITE_URL } from "@/lib/seo";
+import {
+  createFAQPageStructuredData,
+  createPageMetadata,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/seo";
 
 export function generateStaticParams() {
   return Object.keys(servicePageNames).map((slug) => ({ slug }));
@@ -50,7 +55,7 @@ export default async function ServiceDetail({params}:{params:Promise<{slug:strin
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: title,
+    name: solution?.seoTitle ?? title,
     description,
     url: `${SITE_URL}/services/${slug}`,
     provider: {
@@ -64,6 +69,9 @@ export default async function ServiceDetail({params}:{params:Promise<{slug:strin
 
   return <>
     <StructuredData data={serviceSchema} />
+    {solution && (
+      <StructuredData data={createFAQPageStructuredData(solution.faqs)} />
+    )}
     <PageHero
       eyebrow="Service overview"
       title={title}
@@ -101,6 +109,23 @@ export default async function ServiceDetail({params}:{params:Promise<{slug:strin
                 </ul>
               </section>
             </div>
+            <section
+              className="solution-detail-faq"
+              aria-labelledby={`solution-faq-${slug}`}
+            >
+              <span className="kicker">Common questions</span>
+              <h2 id={`solution-faq-${slug}`}>
+                Questions about {solution.title}
+              </h2>
+              <div className="solution-detail-faq-list">
+                {solution.faqs.map(({ question, answer }) => (
+                  <details className="solution-detail-faq-item" key={question}>
+                    <summary>{question}</summary>
+                    <p>{answer}</p>
+                  </details>
+                ))}
+              </div>
+            </section>
           </>
         ) : (
           <div className="content-grid">
