@@ -34,7 +34,7 @@ export async function generateMetadata({
   if (!service) return {};
 
   return createPageMetadata(
-    service.title,
+    service.solution?.seoTitle ?? service.title,
     service.description,
     `/services/${slug}`,
     { index: Boolean(service.solution) }
@@ -77,13 +77,31 @@ export default async function ServiceDetail({params}:{params:Promise<{slug:strin
     <section className="content-section" data-robot-target={`service-detail-${slug}`}>
       <div className="container">
         {solution ? (
-          <div className="content-card solution-detail-card">
-            <span className="kicker">Capabilities</span>
-            <h2>How we can help</h2>
-            <ul className="solution-detail-list">
-              {solution.services.map((service) => <li key={service}>{service}</li>)}
-            </ul>
-          </div>
+          <>
+            <article className="content-card solution-detail-overview">
+              <span className="kicker">Service overview</span>
+              <h2>{solution.seoTitle}</h2>
+              <p>{solution.overview}</p>
+            </article>
+            <div className="solution-detail-columns">
+              <section className="content-card">
+                <h2>Service capabilities</h2>
+                <ul className="solution-detail-list">
+                  {solution.services.map((service) => (
+                    <li key={service}>{service}</li>
+                  ))}
+                </ul>
+              </section>
+              <section className="content-card">
+                <h2>Planning outcomes</h2>
+                <ul className="solution-detail-list">
+                  {solution.outcomes.map((outcome) => (
+                    <li key={outcome}>{outcome}</li>
+                  ))}
+                </ul>
+              </section>
+            </div>
+          </>
         ) : (
           <div className="content-grid">
             <div className="content-card"><h2>Business challenges</h2><p>Complex environments, limited visibility, growth constraints, security concerns, and inconsistent service delivery.</p></div>

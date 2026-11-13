@@ -2284,6 +2284,18 @@ body { background: #08111f; color: #f8fafc; }
   margin: 0 auto;
   padding: clamp(24px, 5vw, 42px);
 }
+.solution-detail-overview {
+  max-width: 900px;
+  margin: 0 auto 18px;
+}
+.solution-detail-overview h2 { margin: 0 0 12px; color: var(--ink); font-size: clamp(22px, 2.6vw, 30px); }
+.solution-detail-overview p { margin: 0; color: var(--body); line-height: 1.7; }
+.solution-detail-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.solution-detail-columns > .content-card h2 { margin: 0 0 18px; font-size: 22px; }
 .solution-detail-card h2 {
   margin: 0 0 22px;
   color: #102b43;
@@ -2332,6 +2344,7 @@ body { background: #08111f; color: #f8fafc; }
   .solution-art { min-height: 142px; }
   .solution-card-content { padding: 20px; }
   .solution-detail-list { grid-template-columns: minmax(0, 1fr); gap: 9px; }
+  .solution-detail-columns { grid-template-columns: minmax(0, 1fr); }
 }
 @media (prefers-reduced-motion: reduce) {
   .solution-card,
