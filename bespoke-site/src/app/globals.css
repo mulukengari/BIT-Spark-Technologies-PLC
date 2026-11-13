@@ -2288,7 +2288,7 @@ body { background: #08111f; color: #f8fafc; }
   max-width: 900px;
   margin: 0 auto 18px;
 }
-.solution-detail-overview h2 { margin: 0 0 12px; color: var(--ink); font-size: clamp(22px, 2.6vw, 30px); }
+.solution-detail-overview h2 { margin: 0 0 12px; color: #f8fafc; font-size: clamp(22px, 2.6vw, 30px); }
 .solution-detail-overview p { margin: 0; color: var(--body); line-height: 1.7; }
 .solution-detail-columns {
   display: grid;
@@ -2302,7 +2302,7 @@ body { background: #08111f; color: #f8fafc; }
 }
 .solution-detail-faq > h2 {
   margin: 8px 0 18px;
-  color: var(--ink);
+  color: #f8fafc;
   font-size: clamp(22px, 2.6vw, 30px);
 }
 .solution-detail-faq-list { display: grid; gap: 12px; }
@@ -2313,14 +2313,14 @@ body { background: #08111f; color: #f8fafc; }
   background: #fff;
 }
 .solution-detail-faq-item summary {
-  color: var(--ink);
+  color: #0b1f34;
   font-weight: 700;
   line-height: 1.5;
   cursor: pointer;
 }
 .solution-detail-faq-item p {
   margin: 12px 0 0;
-  color: var(--body);
+  color: #334e63;
   line-height: 1.7;
 }
 .solution-detail-card h2 {
