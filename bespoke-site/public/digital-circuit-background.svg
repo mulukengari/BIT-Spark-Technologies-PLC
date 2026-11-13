@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="base" x1="120" y1="80" x2="1800" y2="1040" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#06172d"/>
+      <stop offset=".52" stop-color="#08284a"/>
+      <stop offset="1" stop-color="#041426"/>
+    </linearGradient>
+    <radialGradient id="blueGlow" cx="0" cy="0" r="1" gradientTransform="matrix(800 420 -510 970 1420 610)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#087bd0" stop-opacity=".48"/>
+      <stop offset=".56" stop-color="#075da8" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#062342" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="centerGlow" cx="0" cy="0" r="1" gradientTransform="matrix(650 0 0 420 970 490)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0b4a7c" stop-opacity=".2"/>
+      <stop offset="1" stop-color="#06172d" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="trace" x1="300" y1="900" x2="1650" y2="280" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#126dbb" stop-opacity=".08"/>
+      <stop offset=".55" stop-color="#26aaff" stop-opacity=".48"/>
+      <stop offset="1" stop-color="#69d3ff" stop-opacity=".78"/>
+    </linearGradient>
+    <linearGradient id="edgeTrace" x1="960" y1="1080" x2="960" y2="560" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#169cff" stop-opacity=".65"/>
+      <stop offset="1" stop-color="#169cff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softBlur" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="46"/>
+    </filter>
+    <pattern id="grid" width="72" height="72" patternUnits="userSpaceOnUse">
+      <path d="M72 0H0V72" stroke="#69bcff" stroke-opacity=".035"/>
+      <circle cx="0" cy="0" r="1.5" fill="#6ec7ff" fill-opacity=".12"/>
+    </pattern>
+    <path id="pulseTrackOne" d="M250 1120V960l61-61V745l63-63V550l53-53V380l46-46V190"/>
+    <path id="pulseTrackTwo" d="M480 1120V980l54-54V808l50-50V640l55-55V478l51-51V335l45-45V170"/>
+    <path id="pulseTrackThree" d="M720 1120V950l48-48V792l61-61V610l52-52V420l57-57V225"/>
+    <path id="pulseTrackFour" d="M1020 1120V940l54-54V738l60-60V522l48-48V355l58-58V175"/>
+    <path id="pulseTrackFive" d="M1250 1120V970l51-51V810l58-58V630l55-55V450l48-48V255"/>
+    <path id="pulseTrackSix" d="M1490 1120V940l56-56V770l51-51V590l62-62V390l48-48V190"/>
+    <path id="pulseTrackSeven" d="M1740 1120V920l52-52V700l58-58V500l47-47V330l23-23V180"/>
+    <style>
+      .trace { stroke-dasharray: 12 20; animation: current 16s linear infinite; }
+      .trace.slow { animation-duration: 24s; animation-direction: reverse; }
+      .node { transform-box: fill-box; transform-origin: center; animation: nodePulse 4.8s ease-in-out infinite; }
+      .node.delay1 { animation-delay: 1.1s; }
+      .node.delay2 { animation-delay: 2.4s; }
+      .particle { animation: drift 12s ease-in-out infinite; }
+      .particle.delay1 { animation-delay: -3s; }
+      .particle.delay2 { animation-delay: -7s; }
+      .particle.delay3 { animation-delay: -5s; }
+      .ambient { transform-box: fill-box; transform-origin: center; animation: ambient 22s ease-in-out infinite alternate; }
+      @keyframes current { to { stroke-dashoffset: -320; } }
+      @keyframes nodePulse { 0%, 100% { opacity: .44; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.3); } }
+      @keyframes drift { 0%, 100% { opacity: .12; transform: translate3d(0, 0, 0); } 50% { opacity: .9; transform: translate3d(10px, -24px, 0); } }
+      @keyframes ambient { from { transform: translate3d(-12px, 5px, 0) scale(.98); } to { transform: translate3d(12px, -8px, 0) scale(1.03); } }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+      }
+    </style>
+  </defs>
+
+  <path fill="url(#base)" d="M0 0h1920v1080H0z"/>
+  <path fill="url(#blueGlow)" d="M0 0h1920v1080H0z"/>
+  <path fill="url(#centerGlow)" d="M0 0h1920v1080H0z"/>
+  <path fill="url(#grid)" d="M0 0h1920v1080H0z"/>
+
+  <g class="ambient" opacity=".8" filter="url(#softBlur)">
+    <ellipse cx="1530" cy="790" rx="310" ry="138" fill="#087bd0" fill-opacity=".17"/>
+    <ellipse cx="280" cy="940" rx="330" ry="100" fill="#0861a7" fill-opacity=".12"/>
+  </g>
+
+  <g stroke="url(#trace)" stroke-linecap="round" stroke-linejoin="round">
+    <path class="trace" stroke-width="2" d="M0 770h172l54-54h152l46-46h200l56-56h168l55-55h132l64-64h189l59-59h173l58-58h142"/>
+    <path class="trace slow" stroke-width="1.6" d="M0 840h250l42-42h185l52-52h160l49-49h178l55-55h130l59-59h175l51-51h164l54-54h115"/>
+    <path class="trace" stroke-width="1.8" d="M0 920h132l62-62h192l54-54h178l50-50h184l55-55h162l57-57h199l48-48h202l58-58h137"/>
+    <path class="trace slow" stroke-width="1.5" d="M250 1080V960l61-61V745l63-63V550l53-53V380l46-46V220"/>
+    <path class="trace" stroke-width="1.7" d="M480 1080V980l54-54V808l50-50V640l55-55V478l51-51V335l45-45V180"/>
+    <path class="trace slow" stroke-width="1.5" d="M720 1080V950l48-48V792l61-61V610l52-52V420l57-57V255"/>
+    <path class="trace" stroke-width="1.8" d="M1020 1080V940l54-54V738l60-60V522l48-48V355l58-58V205"/>
+    <path class="trace slow" stroke-width="1.5" d="M1250 1080V970l51-51V810l58-58V630l55-55V450l48-48V295"/>
+    <path class="trace" stroke-width="1.7" d="M1490 1080V940l56-56V770l51-51V590l62-62V390l48-48V230"/>
+    <path class="trace slow" stroke-width="1.5" d="M1740 1080V920l52-52V700l58-58V500l47-47V330l23-23"/>
+    <path class="trace" stroke-width="1.3" d="M1920 780h-130l-55-55h-133l-50-50h-143"/>
+    <path class="trace slow" stroke-width="1.2" d="M1920 900h-93l-63-63h-145l-48-48h-113"/>
+  </g>
+
+  <g stroke="url(#edgeTrace)" stroke-width="1">
+    <path d="M0 1000h240l80-80h180l60-60h230"/>
+    <path d="M1920 990h-180l-70-70h-190l-60-60h-190"/>
+    <path d="M350 1080v-83l50-50V810"/>
+    <path d="M880 1080V990l55-55V820"/>
+    <path d="M1370 1080V970l58-58V800"/>
+    <path d="M1660 1080V970l48-48V820"/>
+  </g>
+
+  <g fill="#9cecff" filter="url(#glow)" pointer-events="none">
+    <circle r="4">
+      <animateMotion dur="8s" repeatCount="indefinite"><mpath href="#pulseTrackOne"/></animateMotion>
+      <animate attributeName="opacity" values=".08;1;1;.08" keyTimes="0;.12;.82;1" dur="8s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="3.5">
+      <animateMotion dur="10s" begin="-3.2s" repeatCount="indefinite"><mpath href="#pulseTrackTwo"/></animateMotion>
+      <animate attributeName="opacity" values=".08;1;1;.08" keyTimes="0;.12;.82;1" dur="10s" begin="-3.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="4">
+      <animateMotion dur="9s" begin="-5.4s" repeatCount="indefinite"><mpath href="#pulseTrackThree"/></animateMotion>
+      <animate attributeName="opacity" values=".08;1;1;.08" keyTimes="0;.12;.82;1" dur="9s" begin="-5.4s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="4.5">
+      <animateMotion dur="11s" begin="-2s" repeatCount="indefinite"><mpath href="#pulseTrackFour"/></animateMotion>
+      <animate attributeName="opacity" values=".08;1;1;.08" keyTimes="0;.12;.82;1" dur="11s" begin="-2s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="3.5">
+      <animateMotion dur="9.5s" begin="-6.6s" repeatCount="indefinite"><mpath href="#pulseTrackFive"/></animateMotion>
+      <animate attributeName="opacity" values=".08;1;1;.08" keyTimes="0;.12;.82;1" dur="9.5s" begin="-6.6s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="4">
+      <animateMotion dur="10.5s" begin="-4.8s" repeatCount="indefinite"><mpath href="#pulseTrackSix"/></animateMotion>
+      <animate attributeName="opacity" values=".08;1;1;.08" keyTimes="0;.12;.82;1" dur="10.5s" begin="-4.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="3.5">
+      <animateMotion dur="8.5s" begin="-1.7s" repeatCount="indefinite"><mpath href="#pulseTrackSeven"/></animateMotion>
+      <animate attributeName="opacity" values=".08;1;1;.08" keyTimes="0;.12;.82;1" dur="8.5s" begin="-1.7s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <g fill="#72d6ff" filter="url(#glow)">
+    <circle class="node" cx="424" cy="614" r="3"/>
+    <circle class="node delay1" cx="715" cy="683" r="3"/>
+    <circle class="node delay2" cx="934" cy="501" r="3.5"/>
+    <circle class="node delay1" cx="1186" cy="377" r="3"/>
+    <circle class="node delay2" cx="1439" cy="475" r="3"/>
+    <circle class="node" cx="1600" cy="286" r="4"/>
+    <circle class="node delay1" cx="1740" cy="628" r="3.5"/>
+    <circle class="node delay2" cx="1290" cy="768" r="3"/>
+    <circle class="node" cx="580" cy="832" r="3"/>
+    <circle class="node delay1" cx="1020" cy="890" r="3"/>
+  </g>
+
+  <g fill="#9ce8ff">
+    <circle class="particle" cx="236" cy="320" r="2"/>
+    <circle class="particle delay1" cx="620" cy="246" r="1.6"/>
+    <circle class="particle delay2" cx="880" cy="310" r="2"/>
+    <circle class="particle delay3" cx="1104" cy="178" r="1.7"/>
+    <circle class="particle delay1" cx="1326" cy="228" r="2"/>
+    <circle class="particle delay2" cx="1522" cy="174" r="1.5"/>
+    <circle class="particle delay3" cx="1802" cy="246" r="2"/>
+    <circle class="particle delay2" cx="1080" cy="690" r="1.5"/>
+    <circle class="particle delay1" cx="320" cy="720" r="1.6"/>
+    <circle class="particle" cx="1680" cy="820" r="2"/>
+    <circle class="particle delay3" cx="1412" cy="900" r="1.6"/>
+    <circle class="particle delay1" cx="770" cy="1020" r="2"/>
+  </g>
+
+  <path d="M0 0h1920v1080H0z" fill="url(#base)" opacity=".08"/>
+</svg>

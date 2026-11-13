@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f7fb">
+  <meta name="description" content="Explore the BITspark Core Partner enterprise technology ecosystem.">
+  <title>BITSpark Core Partner | Technology Overview</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      --blue: #2563eb;
+      --blue-dark: #1d4ed8;
+      --blue-soft: #eff6ff;
+      --ink: #1e293b;
+      --muted: #64748b;
+      --line: #e2e8f0;
+      --canvas: #f4f7fb;
+      --white: #fff;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse at 2% 0%, rgba(37, 99, 235, .055), transparent 34rem),
+        var(--canvas);
+    }
+    button { font: inherit; }
+    .page { width: min(1240px, calc(100% - 64px)); margin: 0 auto; padding: 34px 0 56px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 32px; }
+    .brand { display: flex; align-items: center; gap: 11px; color: #0f172a; font-size: 13px; font-weight: 780; letter-spacing: .1em; text-transform: uppercase; }
+    .brand-mark { display: grid; width: 35px; height: 35px; place-items: center; border: 1px solid #bfdbfe; border-radius: 11px; color: var(--blue); background: #eff6ff; }
+    .brand-mark svg { width: 19px; height: 19px; }
+    .topbar-meta { display: flex; align-items: center; gap: 8px; color: #64748b; font-size: 11px; font-weight: 650; }
+    .live-dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 3px #dcfce7; }
+    .page-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 25px; }
+    .eyebrow { color: var(--blue); font-size: 10px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+    h1 { margin: 8px 0 0; color: #172033; font-size: clamp(26px, 3.2vw, 36px); font-weight: 690; letter-spacing: -.045em; line-height: 1.15; }
+    .heading-copy { max-width: 430px; margin: 0 0 2px; color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .dashboard { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(310px, .82fr); align-items: stretch; gap: 18px; }
+    .card { min-width: 0; border: 1px solid rgba(226, 232, 240, .9); border-radius: 16px; background: rgba(255, 255, 255, .9); box-shadow: 0 10px 30px rgba(15, 23, 42, .045), 0 1px 3px rgba(15, 23, 42, .035); }
+    .diagram-card { padding: 19px 20px 17px; }
+    .card-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .card-kicker { color: #94a3b8; font-size: 9px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+    .card-heading h2 { margin: 5px 0 0; color: #233047; font-size: 15px; font-weight: 680; letter-spacing: -.015em; }
+    .legend { display: flex; align-items: center; gap: 6px; color: #718096; font-size: 10px; }
+    .legend i { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
+    .diagram {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 700 / 500;
+      min-height: 350px;
+      max-height: 500px;
+      margin-top: 8px;
+      overflow: hidden;
+      border-radius: 13px;
+      background:
+        radial-gradient(ellipse at center, rgba(219, 234, 254, .82), transparent 49%),
+        linear-gradient(180deg, #fbfdff, #f8faff);
+    }
+    .diagram::before {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(226, 232, 240, .44) 1px, transparent 1px), linear-gradient(90deg, rgba(226, 232, 240, .44) 1px, transparent 1px);
+      background-size: 32px 32px;
+      content: "";
+      opacity: .43;
+      pointer-events: none;
+      mask-image: radial-gradient(ellipse at center, #000, transparent 82%);
+    }
+    .wires { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .wire { stroke: #cbd5e1; stroke-width: 1.25; transition: stroke .25s, stroke-width .25s; }
+    .wire.active { stroke: var(--blue); stroke-width: 2.5; filter: drop-shadow(0 0 3px rgba(37, 99, 235, .32)); }
+    .orbit { fill: none; stroke: #d7e3f3; stroke-dasharray: 2 7; stroke-width: 1; }
+    .core-rings { position: absolute; top: 50%; left: 50%; display: grid; width: 170px; aspect-ratio: 1; place-items: center; border: 1px solid rgba(37, 99, 235, .18); border-radius: 50%; background: rgba(219, 234, 254, .24); box-shadow: 0 0 0 13px rgba(219, 234, 254, .24), 0 0 0 27px rgba(239, 246, 255, .78); transform: translate(-50%, -50%); }
+    .hub { display: flex; width: 112px; aspect-ratio: 1; flex-direction: column; align-items: center; justify-content: center; border: 2px solid #fff; border-radius: 50%; color: #fff; background: linear-gradient(150deg, #3b82f6, #1d4ed8); box-shadow: 0 8px 22px rgba(37, 99, 235, .3), inset 0 1px rgba(255,255,255,.4); text-align: center; }
+    .hub-mark { display: flex; height: 18px; align-items: flex-end; gap: 3px; }
+    .hub-mark i { width: 4px; border-radius: 4px; background: #bfdbfe; }
+    .hub-mark i:nth-child(1) { height: 9px; }
+    .hub-mark i:nth-child(2) { height: 16px; }
+    .hub-mark i:nth-child(3) { height: 12px; }
+    .hub strong { margin-top: 6px; font-size: 12px; font-weight: 760; }
+    .hub span:last-child { margin-top: 3px; color: #dbeafe; font-size: 7px; letter-spacing: .08em; text-transform: uppercase; }
+    .domain {
+      position: absolute;
+      display: flex;
+      width: clamp(106px, 22%, 142px);
+      min-height: 46px;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 10px;
+      border: 1px solid #dfe6ef;
+      border-radius: 11px;
+      color: #475569;
+      background: rgba(255,255,255,.94);
+      box-shadow: 0 5px 13px rgba(15, 23, 42, .06);
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 650;
+      line-height: 1.25;
+      text-align: left;
+      transform: translate(-50%, -50%);
+      transition: border-color .2s, color .2s, background .2s, box-shadow .2s, scale .2s;
+    }
+    .domain:hover { z-index: 2; scale: 1.045; border-color: #93c5fd; color: #1d4ed8; box-shadow: 0 9px 20px rgba(37, 99, 235, .12); }
+    .domain[aria-pressed="true"] { border-color: #60a5fa; color: #1d4ed8; background: #eff6ff; box-shadow: 0 0 0 3px rgba(37, 99, 235, .08), 0 8px 18px rgba(37, 99, 235, .11); }
+    .domain svg { flex: 0 0 auto; width: 15px; height: 15px; color: #94a3b8; }
+    .domain[aria-pressed="true"] svg, .domain:hover svg { color: var(--blue); }
+    .domain:focus-visible, .select-toggle:focus-visible, .domain-option:focus-visible, .benchmark-control:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+    .detail-card { display: flex; flex-direction: column; padding: 21px; }
+    .detail-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding-bottom: 17px; border-bottom: 1px solid #edf1f6; }
+    .selected-label { display: flex; align-items: center; gap: 8px; color: #718096; font-size: 10px; font-weight: 700; }
+    .selected-label .live-dot { width: 7px; height: 7px; background: var(--blue); box-shadow: 0 0 0 3px #dbeafe; }
+    .selected-title { margin: 9px 0 0; color: #18243a; font-size: 23px; font-weight: 700; letter-spacing: -.04em; }
+    .benchmark-control { display: grid; width: 34px; height: 34px; flex: 0 0 auto; place-items: center; border: 1px solid #e2e8f0; border-radius: 10px; color: #64748b; background: white; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+    .benchmark-control:hover { border-color: #bfdbfe; color: var(--blue); background: #f8fbff; }
+    .benchmark-control svg { width: 15px; height: 15px; }
+    .feature-list { display: flex; flex-direction: column; gap: 16px; margin: 20px 0 23px; padding: 0; list-style: none; }
+    .feature-list li { display: flex; align-items: flex-start; gap: 10px; color: #475569; font-size: 12px; line-height: 1.55; }
+    .check { display: grid; width: 17px; height: 17px; flex: 0 0 auto; place-items: center; margin-top: 1px; border-radius: 50%; color: var(--blue); background: #eff6ff; }
+    .check svg { width: 11px; height: 11px; }
+    .benchmark { margin-top: auto; padding: 15px; border: 1px solid #e8eef6; border-radius: 12px; background: linear-gradient(140deg, #fbfdff, #f5f8fc); }
+    .benchmark-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .benchmark-head h3 { margin: 0; color: #64748b; font-size: 10px; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; }
+    .benchmark-live { display: flex; align-items: center; gap: 6px; color: #16a36a; font-size: 9px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+    .benchmark-live .live-dot { width: 6px; height: 6px; background: #22c55e; box-shadow: 0 0 0 3px #dcfce7; }
+    .benchmark.is-paused .benchmark-live { color: #94a3b8; }
+    .benchmark.is-paused .benchmark-live .live-dot { background: #94a3b8; box-shadow: 0 0 0 3px #f1f5f9; }
+    .uptime-label { display: block; margin-top: 14px; color: #94a3b8; font-size: 10px; }
+    .uptime-value { margin-top: 2px; color: #172033; font-size: 28px; font-weight: 730; letter-spacing: -.045em; }
+    .uptime-value span { color: #94a3b8; font-size: 12px; font-weight: 550; letter-spacing: 0; }
+    .uptime-track { height: 5px; margin-top: 11px; overflow: hidden; border-radius: 9px; background: #e2e8f0; }
+    .uptime-track span { display: block; width: 99.99%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #60a5fa, #2563eb); }
+
+    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 18px; padding: 17px 8px; }
+    .metric { padding: 1px 24px; }
+    .metric + .metric { border-left: 1px solid var(--line); }
+    .metric-label { color: #8492a6; font-size: 9px; font-weight: 780; letter-spacing: .12em; text-transform: uppercase; }
+    .metric-value { margin-top: 6px; color: #19253a; font-size: 23px; font-weight: 720; letter-spacing: -.04em; }
+    .metric-value small { margin-left: 4px; color: #8794a6; font-size: 10px; font-weight: 550; letter-spacing: 0; }
+
+    .selector-card { margin-top: 18px; padding: 20px; }
+    .selector-label { display: block; margin-bottom: 11px; color: #546277; font-size: 11px; font-weight: 750; }
+    .select-toggle { display: flex; width: 100%; min-height: 44px; align-items: center; justify-content: space-between; gap: 12px; padding: 0 13px; border: 1px solid #dce4ef; border-radius: 10px; color: #26344a; background: #fff; cursor: pointer; text-align: left; transition: border-color .2s, box-shadow .2s; }
+    .select-toggle:hover, .select-toggle[aria-expanded="true"] { border-color: #93c5fd; box-shadow: 0 0 0 3px rgba(37, 99, 235, .06); }
+    .select-value { display: flex; align-items: center; gap: 9px; font-size: 12px; font-weight: 670; }
+    .select-value svg { width: 15px; height: 15px; color: var(--blue); }
+    .chevron { width: 15px; height: 15px; color: #94a3b8; transition: transform .2s; }
+    .select-toggle[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+    .domain-options { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+    .domain-option { display: flex; min-height: 39px; align-items: center; gap: 7px; padding: 7px 9px; border: 1px solid #e6ebf2; border-radius: 9px; color: #64748b; background: #fff; cursor: pointer; font-size: 10px; font-weight: 610; line-height: 1.25; text-align: left; transition: border-color .18s, color .18s, background .18s, box-shadow .18s; }
+    .domain-option:hover { border-color: #bfdbfe; color: #1d4ed8; background: #f8fbff; }
+    .domain-option[aria-selected="true"] { border-color: #93c5fd; color: #1d4ed8; background: #eff6ff; box-shadow: inset 0 0 0 1px rgba(37, 99, 235, .08); }
+    .option-dot { width: 6px; height: 6px; flex: 0 0 auto; border-radius: 50%; background: #cbd5e1; }
+    .domain-option[aria-selected="true"] .option-dot { background: var(--blue); box-shadow: 0 0 0 3px #dbeafe; }
+    [hidden] { display: none !important; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; clip-path: inset(50%); }
+    .detail-card.is-changing .feature-list { animation: detail-in .26s ease both; }
+    @keyframes detail-in { from { opacity: .35; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 900px) {
+      .page { width: min(calc(100% - 40px), 760px); padding-top: 25px; }
+      .dashboard { grid-template-columns: 1fr; }
+      .diagram { min-height: 430px; }
+      .domain-options { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+    @media (max-width: 540px) {
+      .page { width: min(calc(100% - 28px), 440px); padding-top: 18px; }
+      .topbar { margin-bottom: 24px; }
+      .brand { font-size: 10px; }
+      .brand-mark { width: 31px; height: 31px; }
+      .topbar-meta { font-size: 9px; }
+      .page-heading { display: block; margin-bottom: 19px; }
+      .heading-copy { margin-top: 9px; font-size: 12px; }
+      h1 { font-size: 29px; }
+      .diagram-card, .detail-card { padding: 15px; }
+      .diagram { min-height: 370px; aspect-ratio: 1 / 1; }
+      .domain { width: clamp(88px, 31%, 104px); min-height: 43px; gap: 5px; padding: 7px; font-size: 9px; }
+      .domain[data-domain="software-licensing"] { left: 18% !important; }
+      .domain[data-domain="data-center"] { left: 82% !important; }
+      .domain svg { width: 13px; height: 13px; }
+      .core-rings { width: 137px; box-shadow: 0 0 0 9px rgba(219, 234, 254, .24), 0 0 0 18px rgba(239, 246, 255, .78); }
+      .hub { width: 91px; }
+      .hub strong { font-size: 10px; }
+      .hub span:last-child { font-size: 6px; }
+      .selected-title { font-size: 21px; }
+      .metrics { padding: 15px 3px; }
+      .metric { padding: 1px 10px; }
+      .metric-label { font-size: 8px; letter-spacing: .08em; }
+      .metric-value { font-size: 19px; }
+      .metric-value small { display: block; margin: 2px 0 0; font-size: 9px; }
+      .selector-card { padding: 15px; }
+      .domain-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 17.5 9.2 6l3.1 6.1 2.4-4.3L20 17.5M7 17.5h10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        BITSpark Core Partner
+      </div>
+      <div class="topbar-meta"><span class="live-dot"></span> Ecosystem status: Operational</div>
+    </header>
+
+    <section class="page-heading" aria-labelledby="page-title">
+      <div>
+        <span class="eyebrow">Enterprise technology ecosystem</span>
+        <h1 id="page-title">Connected technology. Reliable outcomes.</h1>
+      </div>
+      <p class="heading-copy">A unified view of the platforms, partnerships, and operational strengths behind your enterprise technology.</p>
+    </section>
+
+    <section class="dashboard" aria-label="Technology ecosystem dashboard">
+      <section class="card diagram-card" aria-labelledby="architecture-title">
+        <header class="card-heading">
+          <div>
+            <span class="card-kicker">Architecture overview</span>
+            <h2 id="architecture-title">Enterprise technology domains</h2>
+          </div>
+          <span class="legend"><i></i> Active domain</span>
+        </header>
+        <div class="diagram" aria-label="Radial enterprise technology architecture">
+          <svg class="wires" viewBox="0 0 700 500" preserveAspectRatio="none" aria-hidden="true">
+            <line class="wire active" data-wire="network" x1="350" y1="250" x2="350" y2="47"/>
+            <line class="wire" data-wire="cloud-hub" x1="350" y1="250" x2="560" y2="92"/>
+            <line class="wire" data-wire="data-center" x1="350" y1="250" x2="590" y2="250"/>
+            <line class="wire" data-wire="security" x1="350" y1="250" x2="560" y2="408"/>
+            <line class="wire" data-wire="enterprise-compute" x1="350" y1="250" x2="350" y2="453"/>
+            <line class="wire" data-wire="enterprise-storage" x1="350" y1="250" x2="140" y2="408"/>
+            <line class="wire" data-wire="software-licensing" x1="350" y1="250" x2="110" y2="250"/>
+            <line class="wire" data-wire="it-infrastructure" x1="350" y1="250" x2="140" y2="92"/>
+            <circle class="orbit" cx="350" cy="250" r="160"/>
+          </svg>
+          <div class="core-rings" aria-hidden="true">
+            <div class="hub">
+              <span class="hub-mark"><i></i><i></i><i></i></span>
+              <strong>BITSpark</strong>
+              <span>Core Partner</span>
+            </div>
+          </div>
+
+          <button class="domain" type="button" data-domain="network" aria-pressed="true" style="left:50%;top:9.4%">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 21h8m-4-3v3m-5-9 3 2 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Network</span>
+          </button>
+          <button class="domain" type="button" data-domain="cloud-hub" aria-pressed="false" style="left:80%;top:18.4%">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7.5 18h10a4 4 0 0 0 .4-8 6 6 0 0 0-11.6 1.3A3.4 3.4 0 0 0 7.5 18Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Cloud Hub</span>
+          </button>
+          <button class="domain" type="button" data-domain="data-center" aria-pressed="false" style="left:84.3%;top:50%">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 7h8M8 12h8m-8 5h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="16" cy="17" r=".8" fill="currentColor"/></svg><span>Data Center</span>
+          </button>
+          <button class="domain" type="button" data-domain="security" aria-pressed="false" style="left:80%;top:81.6%">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 8 3v5c0 5-3.4 8.3-8 10-4.6-1.7-8-5-8-10V6l8-3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m8.5 12 2.2 2.2 4.8-4.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Security</span>
+          </button>
+          <button class="domain" type="button" data-domain="enterprise-compute" aria-pressed="false" style="left:50%;top:90.6%">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 7h8m-8 5h8m-8 5h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Enterprise Compute</span>
+          </button>
+          <button class="domain" type="button" data-domain="enterprise-storage" aria-pressed="false" style="left:20%;top:81.6%">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><ellipse cx="12" cy="5.5" rx="8" ry="3" stroke="currentColor" stroke-width="1.6"/><path d="M4 5.5v13c0 1.7 3.6 3 8 3s8-1.3 8-3v-13M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3" stroke="currentColor" stroke-width="1.6"/></svg><span>Enterprise Storage</span>
+          </button>
+          <button class="domain" type="button" data-domain="software-licensing" aria-pressed="false" style="left:15.7%;top:50%">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 9h18m-13 5 2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Software &amp; Licensing</span>
+          </button>
+          <button class="domain" type="button" data-domain="it-infrastructure" aria-pressed="false" style="left:20%;top:18.4%">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4" width="8" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="13" y="13" width="8" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M11 7.5h4a2 2 0 0 1 2 2V13M7 11v4a2 2 0 0 0 2 2h4" stroke="currentColor" stroke-width="1.6"/></svg><span>IT Infrastructure</span>
+          </button>
+        </div>
+      </section>
+
+      <aside class="card detail-card" id="detail-card" aria-labelledby="selected-title" aria-live="polite">
+        <header class="detail-top">
+          <div>
+            <span class="selected-label"><i class="live-dot"></i><span id="detail-category">Enterprise Connectivity</span></span>
+            <h2 class="selected-title" id="selected-title">Network</h2>
+          </div>
+          <button class="benchmark-control" id="benchmark-control" type="button" aria-label="Pause live performance benchmarks" title="Pause live performance benchmarks">
+            <svg id="control-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5v14m8-14v14" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/></svg>
+          </button>
+        </header>
+        <ul class="feature-list" id="feature-list">
+          <li><span class="check"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m3.5 8 3 3 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span id="feature-one">Enterprise WAN/LAN Optimization &amp; SD-WAN</span></li>
+          <li><span class="check"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m3.5 8 3 3 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span id="feature-two">High-speed routing, automated path selection &amp; mesh layout</span></li>
+          <li><span class="check"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m3.5 8 3 3 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span id="feature-three">Unified edge-to-core perimeter and micro-segmentation</span></li>
+        </ul>
+        <section class="benchmark" id="benchmark" aria-labelledby="benchmark-title">
+          <header class="benchmark-head">
+            <h3 id="benchmark-title">Live Performance Benchmarks</h3>
+            <span class="benchmark-live"><i class="live-dot"></i><span id="benchmark-status">Live</span></span>
+          </header>
+          <span class="uptime-label">Uptime Goal</span>
+          <div class="uptime-value" id="uptime-value">99.99<span>%</span></div>
+          <div class="uptime-track" aria-hidden="true"><span></span></div>
+        </section>
+      </aside>
+    </section>
+
+    <section class="card metrics" aria-label="Network performance metrics">
+      <div class="metric">
+        <div class="metric-label">Uptime Goal</div>
+        <div class="metric-value" id="metric-uptime">99.99<small>% availability</small></div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Latency Avg</div>
+        <div class="metric-value" id="metric-latency">&lt; 5<small>ms</small></div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Bandwidth</div>
+        <div class="metric-value" id="metric-bandwidth">Multi-Gb</div>
+      </div>
+    </section>
+
+    <section class="card selector-card" aria-labelledby="selector-label">
+      <label class="selector-label" id="selector-label" for="domain-toggle">Select Enterprise Technology Domain Pillar</label>
+      <button class="select-toggle" id="domain-toggle" type="button" aria-expanded="true" aria-controls="domain-options">
+        <span class="select-value" id="select-value">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 21h8m-4-3v3m-5-9 3 2 5-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Network</span>
+        </span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="domain-options" id="domain-options" role="listbox" aria-label="Enterprise technology domains">
+        <button class="domain-option" type="button" role="option" data-domain="network" aria-selected="true"><i class="option-dot"></i>Network</button>
+        <button class="domain-option" type="button" role="option" data-domain="cloud-hub" aria-selected="false"><i class="option-dot"></i>Cloud Hub</button>
+        <button class="domain-option" type="button" role="option" data-domain="data-center" aria-selected="false"><i class="option-dot"></i>Data Center</button>
+        <button class="domain-option" type="button" role="option" data-domain="security" aria-selected="false"><i class="option-dot"></i>Security</button>
+        <button class="domain-option" type="button" role="option" data-domain="enterprise-compute" aria-selected="false"><i class="option-dot"></i>Enterprise Compute</button>
+        <button class="domain-option" type="button" role="option" data-domain="enterprise-storage" aria-selected="false"><i class="option-dot"></i>Enterprise Storage</button>
+        <button class="domain-option" type="button" role="option" data-domain="software-licensing" aria-selected="false"><i class="option-dot"></i>Software &amp; Licensing</button>
+        <button class="domain-option" type="button" role="option" data-domain="it-infrastructure" aria-selected="false"><i class="option-dot"></i>IT Infrastructure</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const domains = {
+      network: {
+        title: "Network", category: "Enterprise Connectivity",
+        features: [
+          "Enterprise WAN/LAN Optimization & SD-WAN",
+          "High-speed routing, automated path selection & mesh layout",
+          "Unified edge-to-core perimeter and micro-segmentation"
+        ],
+        uptime: "99.99", latency: "&lt; 5", bandwidth: "Multi-Gb"
+      },
+      "cloud-hub": {
+        title: "Cloud Hub", category: "Cloud Platform",
+        features: [
+          "Hybrid and multi-cloud workload connectivity",
+          "Centralized cloud landing zones, identity, and governance",
+          "Scalable compute and resilient application services"
+        ],
+        uptime: "99.95", latency: "&lt; 10", bandwidth: "Elastic"
+      },
+      "data-center": {
+        title: "Data Center", category: "Enterprise Infrastructure",
+        features: [
+          "High-availability compute and critical workload hosting",
+          "Resilient facilities, power, and environmental controls",
+          "Capacity planning and lifecycle-aligned modernization"
+        ],
+        uptime: "99.99", latency: "&lt; 2", bandwidth: "100 Gb"
+      },
+      security: {
+        title: "Security", category: "Cybersecurity & Resilience",
+        features: [
+          "Identity-aware security and zero-trust access policies",
+          "Threat monitoring, response readiness, and clear visibility",
+          "Unified perimeter controls and micro-segmentation"
+        ],
+        uptime: "99.99", latency: "&lt; 10", bandwidth: "Always-on"
+      },
+      "enterprise-compute": {
+        title: "Enterprise Compute", category: "Compute Platforms",
+        features: [
+          "Right-sized server platforms for business-critical workloads",
+          "Virtualization and workload orchestration across environments",
+          "Lifecycle planning for performance and availability"
+        ],
+        uptime: "99.99", latency: "&lt; 5", bandwidth: "High I/O"
+      },
+      "enterprise-storage": {
+        title: "Enterprise Storage", category: "Data Platforms",
+        features: [
+          "Scalable storage for structured and unstructured data",
+          "Tiered performance, replication, and data protection",
+          "Recovery-ready architecture aligned to retention needs"
+        ],
+        uptime: "99.99", latency: "&lt; 3", bandwidth: "Multi-Gb"
+      },
+      "software-licensing": {
+        title: "Software & Licensing", category: "Software Lifecycle",
+        features: [
+          "Software portfolio aligned to business and user requirements",
+          "License visibility, utilization, and renewal coordination",
+          "Support for deployment, adoption, and lifecycle planning"
+        ],
+        uptime: "99.9", latency: "&lt; 20", bandwidth: "Cloud-ready"
+      },
+      "it-infrastructure": {
+        title: "IT Infrastructure", category: "Core Technology Services",
+        features: [
+          "Integrated infrastructure across sites and environments",
+          "Consistent configuration, observability, and management",
+          "Planned maintenance and operational support readiness"
+        ],
+        uptime: "99.95", latency: "&lt; 10", bandwidth: "Multi-Gb"
+      }
+    };
+
+    const allDomainControls = document.querySelectorAll("[data-domain]");
+    const detailCard = document.querySelector("#detail-card");
+    const detailTitle = document.querySelector("#selected-title");
+    const detailCategory = document.querySelector("#detail-category");
+    const featureElements = [
+      document.querySelector("#feature-one"),
+      document.querySelector("#feature-two"),
+      document.querySelector("#feature-three")
+    ];
+    const metricUptime = document.querySelector("#metric-uptime");
+    const metricLatency = document.querySelector("#metric-latency");
+    const metricBandwidth = document.querySelector("#metric-bandwidth");
+    const uptimeValue = document.querySelector("#uptime-value");
+    const benchmark = document.querySelector("#benchmark");
+    const benchmarkStatus = document.querySelector("#benchmark-status");
+    const benchmarkControl = document.querySelector("#benchmark-control");
+    const controlIcon = document.querySelector("#control-icon");
+    const domainToggle = document.querySelector("#domain-toggle");
+    const domainOptions = document.querySelector("#domain-options");
+    const selectValue = document.querySelector("#select-value");
+    let benchmarksPaused = false;
+
+    function selectDomain(id) {
+      const domain = domains[id];
+      if (!domain) return;
+
+      allDomainControls.forEach((control) => {
+        if (control.matches(".domain")) {
+          control.setAttribute("aria-pressed", String(control.dataset.domain === id));
+        } else {
+          control.setAttribute("aria-selected", String(control.dataset.domain === id));
+        }
+      });
+      document.querySelectorAll("[data-wire]").forEach((wire) => {
+        wire.classList.toggle("active", wire.dataset.wire === id);
+      });
+
+      detailTitle.textContent = domain.title;
+      detailCategory.textContent = domain.category;
+      featureElements.forEach((element, index) => {
+        element.textContent = domain.features[index];
+      });
+      metricUptime.innerHTML = `${domain.uptime}<small>% availability</small>`;
+      metricLatency.innerHTML = `${domain.latency}<small>ms</small>`;
+      metricBandwidth.textContent = domain.bandwidth;
+      uptimeValue.innerHTML = `${domain.uptime}<span>%</span>`;
+      selectValue.lastElementChild.textContent = domain.title;
+
+      detailCard.classList.remove("is-changing");
+      void detailCard.offsetWidth;
+      detailCard.classList.add("is-changing");
+    }
+
+    allDomainControls.forEach((control) => {
+      control.addEventListener("click", () => selectDomain(control.dataset.domain));
+    });
+
+    domainToggle.addEventListener("click", () => {
+      const isExpanded = domainToggle.getAttribute("aria-expanded") === "true";
+      domainToggle.setAttribute("aria-expanded", String(!isExpanded));
+      domainOptions.hidden = isExpanded;
+    });
+
+    benchmarkControl.addEventListener("click", () => {
+      benchmarksPaused = !benchmarksPaused;
+      benchmark.classList.toggle("is-paused", benchmarksPaused);
+      benchmarkStatus.textContent = benchmarksPaused ? "Paused" : "Live";
+      const label = benchmarksPaused ? "Resume live performance benchmarks" : "Pause live performance benchmarks";
+      benchmarkControl.setAttribute("aria-label", label);
+      benchmarkControl.title = label;
+      controlIcon.innerHTML = benchmarksPaused
+        ? '<path d="m9 5 10 7-10 7V5Z" fill="currentColor"/>'
+        : '<path d="M8 5v14m8-14v14" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/>';
+    });
+
+    selectDomain("network");
+  </script>
+</body>
+</html>
