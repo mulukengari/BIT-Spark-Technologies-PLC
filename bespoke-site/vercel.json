@@ -1,6 +1,5 @@
 {
   "framework": "nextjs",
   "buildCommand": "next build",
-  "cleanBuilds": true,
   "domain": "bitspark-tech.pro.et"
 }
