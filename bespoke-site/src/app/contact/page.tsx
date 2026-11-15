@@ -45,6 +45,24 @@ export default function ContactPage() {
                   View on Google Maps
                 </a>
               </p>
+              <next/script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7PhR1LlHmWYzZbqbOqJpQ1YjYjYjYjY&callback=initMap"
+                defer
+              />
+              <script>
+                function initMap() {
+                  const addisAbaba = { lat: 9.03, lng: 38.74 };
+                  const map = new google.maps.Map(document.getElementById("map"), {
+                    zoom: 15,
+                    center: addisAbaba,
+                  });
+                  new google.maps.Marker({
+                    position: addisAbaba,
+                    map: map,
+                    title: "BIT Spark Technologies",
+                  });
+                }
+              </script>
             </div>
           </div>
         </div>
