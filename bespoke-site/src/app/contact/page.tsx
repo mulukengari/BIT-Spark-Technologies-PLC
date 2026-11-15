@@ -33,6 +33,20 @@ export default function ContactPage() {
             <h2>Send an enquiry</h2>
             <ContactForm />
           </div>
+          <div className="lg:col-span-2 pt-12">
+            <div className="rounded-xl border border-border bg-white p-6">
+              <h3 className="text-lg font-semibold text-navy mb-4">Our Office Location</h3>
+              <div id="map" className="h-64 w-full rounded-lg overflow-hidden mt-4"></div>
+              <p className="mt-4 text-sm text-foreground/60">
+                Addis Ababa, Ethiopia
+                <br />
+                <a href="https://www.google.com/maps/search/?api=1&query=Addis+Ababa,+Ethiopia" target="_blank" rel="noopener"
+                  className="text-electric underline">
+                  View on Google Maps
+                </a>
+              </p>
+            </div>
+          </div>
         </div>
       </section>
     </>
