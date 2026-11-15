@@ -45,7 +45,8 @@ export default function ContactPage() {
                   View on Google Maps
                 </a>
               </p>
-              <next/script
+              <script
+                async
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7PhR1LlHmWYzZbqbOqJpQ1YjYjYjYjY&callback=initMap"
                 defer
               />
